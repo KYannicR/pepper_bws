@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name" translatable="false">Pepper_BWS</string>
+    <string name="kar_button" translatable="false">Benefits</string>
+    <string name="ent_button" translatable="false">Unterhaltung</string>
+    <string name="back" translatable="false">Zurück</string>
+    <string name="dance" translatable="false">Tanzen</string>
+    <string name="five" translatable="false">High Five</string>
+    <string name="hug" translatable="false">Umarmung</string>
+    <string name="jobs_button" translatable="false">Stellenanzeigen</string>
+    <string name="title_activity_jobs" translatable="false">JobsActivity</string>
+</resources>

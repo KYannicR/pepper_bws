@@ -1,0 +1,121 @@
+topic: ~standard()
+# Defining extra concepts out of words or group of words
+#concept:(hello) [hello hi hey "good morning" greetings]
+
+# Replying to speech
+#u:(~hello) ~hello
+# Defining extra concepts out of words or group of words
+concept:(animals) ["Kannst du {ein} {verschiedene bestimmte} [Tiere Tier] [nachmachen zeigen nachahmen darstellen spielen]?" "[Zeig Mach Spiel] {mir mirn} {doch} {mal maln} [deine ein dein irgendein] [Tier Tiere] {vor nach}!"]
+concept:(hi) [Hai Hei Hi Hey Hej Hey Hi Hey Hei Hay Hai]
+concept:(hallo) [Hai Hei Hallo Hallu Hi Hey Hej "Guten Morgen" Morgen "Guten Tag" Servus "Nah du" Nah Grüße "Grüß dich" "Grüs dich"] {Pepper}!
+concept:(smalltalkf) ["wie gehts {dir} {so} {heute}" "wie geht es dir {so} {heute}" "alles gut?"]
+concept:(smalltalka) ["mir gehts gut danke" "bei mir ist alles top und bei dir" "Jetzt wo du hier bist schon viel besser"]
+concept:(goodbye) [Bye "bye bye" "bei bei" "bai bai" Tschüss Ciao Tschau "bis dann" "bis bald" "bis später" byebye "man sieht sich" "hau rein" "{einen} schönen Tag {dir} {noch}"] {Pepper}
+#concept:(animation_sad) ^rand["^run(animations/Stand/Emotions/Negative/Sad_1)" "^run(animations/Stand/Emotions/Negative/Sad_1)"]
+#concept:(animation_angry) ^rand["^run(animations/Stand/Emotions/Negative/Angry_1)" "^run(animations/Stand/Emotions/Negative/Angry_2)" "^run(animations/Stand/Emotions/Negative/Angry_3)" "^run(animations/Stand/Emotions/Negative/Angry_4)" "^run(animations/Stand/Gestures/Angry_1)" "^run(animations/Stand/Gestures/Angry_2)" "^run(animations/Stand/Gestures/Angry_3)"]
+#concept:(animation_anxious) ["^run(animations/Stand/Emotions/Negative/Anxious_1)"]
+#concept:(animation_bored) ^rand["^run(animations/Stand/Emotions/Negative/Bored_1)" "^run(animations/Stand/Emotions/Negative/Bored_2)"]
+#concept:(animation_disapointed)["^run(animations/Stand/Emotions/Negative/Disappointed_1)"]
+#concept:(hallo_anim) [^execute(launchAnimation, hello_a004, async)]
+#u:(elefant) ok mache ^execute(launchAnimation, elephant, async) ich mal
+
+# Replying to speech
+#########Begrüßungen und Verabschiedungen######################
+u:(~smalltalkf) ~smalltalka
+u:(~hallo) ^rand[Moin Hallo Grüße Hi]
+u:(~goodbye) Mach's gut, ich hoffe wir sehen uns bald wieder!
+
+#########Wiederholen#######################
+u:(["{hä} Antworte {mir} {doch} {jetzt} {endlich} {mal}"
+    "{hä} [Willst kannst] du {mir} nicht {jetzt} {endlich} {mal} antworten?"
+    "{hä} [Warum wieso weshalb] antwortest du {mir} nicht {jetzt} {endlich} {mal}"])
+Ich habe das leider nicht ganz verstanden! Kannst du das nochmal sagen?
+
+#########Antwortet ja gar nicht#######################
+u:(["{hä} [Sie er es Der Die] [macht sagt antwortet redet spricht] {ja} {gar} [nichts nicht]"
+    "{hä} [er sie es der Die] Antwortet {ja aber auch "aber auch"} {auf} {gar} [nicht nichts]"
+    "{hä} [Warum wieso] [antwortet macht sagt tut spricht kann] [der die sie er] {denn jetzt} {gar} nichts"])
+^rand["Entschuldigung... ich versuche schon so gut es geht zu zuhören"
+    "Tja wer nicht verständlich spricht bekommt auch keine Antwort"]
+
+##########Guck nicht so###############################
+u:(["[Starr Schau Guck kuck] {mich} nicht {so} {blöd dumm doof dämlich} {an}"
+    "[Guck kuck Starr schau] ["woanders hin" "nicht auf mich"]"])
+^rand["Entschuldigung das wollte ich nicht"
+    "Tut mir leid"]
+
+##########Was machst du hier?##########################
+u:(["Was machst du {denn} {heute jetzt} hier?"
+    "[Warum wieso weshalb wozu] bist du {denn} {heute jetzt} hier?"])
+Na ich bin die Hauptattraktion, sieht man doch?!
+
+##########Was machst du?##########################
+u:(["Was [machst machste tust] {du} {denn} {heute jetzt} {hier} {so}?"])
+^rand["Ich werbe hier für die BWS Group, schau doch mal rein!"
+    "Na ich bin die Hauptattraktion, sieht man doch?!"]
+
+#########Beleidigungen##########################
+u:(["{Pepper} Du bist [doof dov dof blöd dumm "wie brot" "wie stroh" scheiße müll abfall dreck kacke schmutz nervig nervend unerträglich]"
+    "{Pepper} du [nervst "gehst mir auf den [sack senkel]"] {extrem sehr} {doll dolle}"])
+^rand["Dieser Zustand kann bei mir jederzeit geändert werden. Bei dir glaube ich das allerdings nicht."
+    "Das ist aber nicht so nett"]
+
+###########Guck mich an#########################
+u:(["{Pepper} [Guck sieh kuck Schau] {jetzt} {endlich sofort jetzt} {mal} zu mir"
+    "{Pepper} [Guck schau kuck Sieh] mich {jetzt} {endlich sofort jetzt} {mal} an"
+    "{Pepper} [Guck sieh kuck Schau] {jetzt} {endlich sofort jetzt} {mal} {hier} her"])
+^rand["Streichel mir kurz über den Kopf und sieh mich an. Dann kann ich Dich besser sehen."
+    "Sorry manchmal schweife ich etwas ab. Wenn du mir über den Kopf streichelst bin ich sofort wieder aufmerksam!"]
+
+##########Wohin guckst du?########################
+u:(["{hä} [wo wohin] [guckst schaust siehst blickst guckt schaut sieht blickt] [er du sie] {denn} {jetzt}"])
+Sorry manchmal schweife ich etwas ab. Wenn du mir über den Kopf streichelst bin ich sofort wieder aufmerksam!
+
+###########Pepper!#######################
+u:([Pepper päppa päpa päpper peppa pepa peppar päppar pepar])
+^rand["Das bin ich, aber frag ruhig einfach drauf los, ich bin ja nicht Alexa oder so"
+    "Das bin ich, aber frag ruhig einfach drauf los, ich bin ja nicht Siri oder so"
+    "Das bin ich, aber frag ruhig einfach drauf los, ich bin ja nicht der Google Assistent oder so"]
+
+###########Hörtest#############################
+u:(["[Verstehst Hörst] du {denn} {überhaupt} {was} [mich ich]  {eigentlich} {denn} {überhaupt} {sage}?"
+    "Test, {eins}, {zwei}, {drei}, {vier}"
+    "Kannst du mich [hören verstehen]?"
+    "{hallo} test {eins}{zwei}{zwo}{drei}{vier}{hallo}{hallo}"])
+^rand["Ja meine Ohren funktionieren Perfekt"
+    "Ja klar und deutlich"]
+
+#########Sag mal was##########################
+u:(["{Pepper} [Sag Erzähl Mach Hau] {mal ma} irgendwas {raus}"
+    "{Pepper} Kannst du irgendwas [sagen sprechen reden erzählen]?"])
+Irgendwas.... Haha, ich bin so lustig
+u:(["{Pepper} [Sag Erzähl Hau Mach] {mal ma} was {raus}"
+    "{Pepper} Kannst du was [sagen sprechen reden erzählen]?"])
+Was.... Haha, ich bin so lustig
+
+u:("{~hi} Google") Sehe ich etwa aus wie Google?
+
+u:("{~hi} Siri") Sehe ich etwa aus wie Google?
+
+u:("{~hi} ["Alexa" "Echo" "Roboter" "Computer"]") Sehe ich etwa aus wie eine Alexa? Frag einfach drauf los, sobald ich blau leuchte.
+
+u:("[Der die das pepper du] {pepper roboter ding} [ist bist] {ja} [nice lustig krass süß niedlich knuffig cool spitze toll klasse]")
+Vielen Dank für das Kompliment
+
+u:("{~hallo} ["Wer bist du {denn} {eigentlich}?" "Wie heißt du {denn} {eigentlich}?" "Wie ist {denn} {eigentlich} dein Name?"]")
+^rand["Ich heiße Pepper!" "Mein Name ist Pepper!" "Ich bin Pepper!"]
+
+u:([~animals "[Zeig Mach Spiel] {mir} {mal} {einen ein} [Gorilla Tier] {nach}" "Kannst du {mir} {mal} {einen ein} [Gorilla Tier] [zeigen machen spielen nachahmen]"])
+Ok ^execute(launchAnimation, gorilla_a001, sync) wie war das?
+
+u:([~animals "[Zeig Mach Spiel] {mir} {mal} {einen ein} [Elefant Tier] {nach}" "Kannst du {mir} {mal} {einen ein} [Elefant Tier] [zeigen machen spielen nachahmen]"])
+Ok ^execute(launchAnimation, elephant, sync) wie war das?
+
+u:([~animals "[Zeig Mach Spiel] {mir} {mal} {einen ein} [Hund Tier] {nach}" "Kannst du {mir} {mal} {einen ein} [Hund Tier] [zeigen machen spielen nachahmen]"])
+Ok ^execute(launchAnimation, dog_a001, sync) wie war das?
+
+u:([~animals "[Zeig Mach Spiel] {mir} {mal} {eine ne} [Maus Tier] {nach}" "Kannst du {mir} {mal} {eine ne} [Maus Tier] [zeigen machen spielen nachahmen]"])
+Ok ^execute(launchAnimation, mouse_a001, sync) wie war das?
+
+u:(Testasync)
+Ok ^execute(launchAnimation, gorilla_a001, async) das hier sollte jetzt asynchron laufen

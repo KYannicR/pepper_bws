@@ -1,0 +1,28 @@
+topic: ~solitary()
+#proposal: %test ^rand[
+ #   "^enableThenGoto(bored_anim) ^rand["Man ist das langweilig hier." "Hier ist ja gar nichts los."]"
+  #  "^enableThenGoto(sleep_anim) ^rand["Ups.. da wäre ich doch fast eingenickt." "Oh man.. jetzt wäre ich fast schon eingeschlafen."]"
+   # "^enableThenGoto(moan_anim) ^rand["Langsam werd ich ja schon müde hier." "Oh man langsam wirds langweilig hier."]"
+#]
+
+#proposal: %test ^gotoRandom(sleep_anim) ^rand["Ups.. da wäre ich doch fast eingenickt." "Oh man.. jetzt wäre ich fast schon eingeschlafen."]
+
+#proposal: %test ^gotoRandom(moan_anim) ^rand["Langsam werd ich ja schon müde hier." "Oh man langsam wirds langweilig hier."]
+
+u:(^empty) %bored_anim
+^execute(launchAnimation, scratch_top_of_head_right_b001, sync) ^rand["Man ist das langweilig hier." "Hier ist ja gar nichts los."]
+
+u:(^empty) %bored_anim
+^execute(launchAnimation, check_time_right_b001, sync) ^rand["Man ist das langweilig hier." "Hier ist ja gar nichts los."]
+
+u:(^empty) %moan_anim
+^execute(launchAnimation, bored_a001, sync) ^rand["Langsam werd ich ja schon müde hier." "Oh man langsam wirds langweilig hier."]
+
+u:(^empty) %moan_anim
+^execute(launchAnimation, sad_a001, sync) ^rand["Langsam werd ich ja schon müde hier." "Oh man langsam wirds langweilig hier."]
+
+u:(^empty) %sleep_anim
+^execute(launchAnimation, napping_right, sync) ^rand["Ups.. da wäre ich doch fast eingenickt." "Oh man.. jetzt wäre ich fast schon eingeschlafen."]
+
+u:(^empty) %sleep_anim
+^execute(launchAnimation, napping_left, sync) ^rand["Ups.. da wäre ich doch fast eingenickt." "Oh man.. jetzt wäre ich fast schon eingeschlafen."]

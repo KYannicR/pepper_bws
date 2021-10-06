@@ -1,0 +1,185 @@
+topic: ~proactive()
+# Defining extra concepts out of words or group of words
+#concept:(hello) [hello hi hey "good morning" greetings]
+concept:(ja) {Ähm Äh Ehm Eh Öh Öhm hm mh} {denke "denke mal" wahrscheinlich eher eigentlich} [Ja Jaa Joa Klar Klaro Immer "Wenns sein muss" Natürlich Absolut Jap Jop Jo Yo Yop] {schon}
+concept:(nein) {Ähm Äh Ehm Eh Öh Öhm hm mh} {eher wahrscheinlich eigentlich} [nöö nää Ne Nee Nä Neh Nö Nein "Nicht wirklich" "Nich wirklich" "Eigentlich nicht" Nicht] {Eigentlich} {nicht} {wirklich}
+concept:(danke) {oh uh} {ähm äh} {Vielen} {Herzlichen} [Danke Dank Dankeschön Dankee ßänks ssänks Dankä ssänk ßänk thank thanks dange] {vielmals sehr dir you jou ju}
+concept:(gut) {Ähm Äh Ehm Eh Öh Öhm hm mh} {eigentlich denke "ich denke" eher} {ganz ziemlich voll sehr super} {gut toll super spitzenmäßig supi fantastisch}
+
+u:(^empty) %wo_am_liebsten
+^execute(launchAnimation, hello_a009, async) Hi, Möchtest du lieber an unserem Standort in Wolfsburg, Braunschweig oder Hannover arbeiten?
+  u1:("{lieber eher "am liebsten" "am ehesten" wahrscheinlich eher} {in bei nahe} {"der nähe"} Hannover")
+        Dann bewirb dich doch gleich dort
+  u1:("{lieber eher "am liebsten" "am ehesten" wahrscheinlich eher} {in bei nahe} {"der nähe"} Braunschweig")
+        Cool, gerne kannst du dich dort bewerben
+  u1:("{lieber eher "am liebsten" "am ehesten" wahrscheinlich eher} {in bei nahe} {"der nähe"} Wolfsburg")
+        Neis, da ist auch unser Hauptsitz
+  u1:("{Bei} {Gar überhaupt absolut} [Keiner Keins Nichts Keinem Nirgends nicht] {davon "von denen" da}")
+        Oh, das ist aber Schade
+
+u:(^empty) %interesse
+^execute(launchAnimation, hello_a009, async)
+^rand[
+        "Hey, Hast du Lust auf neue Projekte?"
+        "Hast du Lust auf moderne Projekte mit Cloud-Anwendungen?"
+        "Hi, Hast du Lust auf Webentwicklung?"
+        "Hast du Erfahrung in der agilen Softwareentwicklung?"
+        "Hey, Hast du Lust auf spannende Kundenprojekte?"
+        "Gefällt es dir mit Jaawaa, dot net oder C zu programmieren?"]
+  u1:(~ja)
+        ^rand[  "Neis, dann bewirb dich doch einfach bei uns"
+                "Cool, schau dich ruhig mal hier um"
+                "Dann kannst du dir unseren Stand gerne näher ansehen"
+                "Neis, dann kannst du dich ja bei uns bewerben."]
+  u1:(~nein)
+        ^rand[  "Oh, schau dich ruhig trotzdem mal um"
+                "Dann kannst du auch gleich wieder gehen!"]
+
+u:(^empty) %kennst_du
+^execute(launchAnimation, hello_a009, async)
+^rand[  "Kennst du dich zufällig mit Frejmwörks wie heibernejt oder Sbring aus?"
+        "Kennst du dich vielleicht mit Ri eckt oder engjular aus? "
+        "Kennst du dich mit Code-Reviews und Tests aus? "]
+  u1:(~ja)
+        ^rand[  "Perfekt, schau dich ruhig mal hier um"
+                "Das ist ja ein Zufall, dann bewirb dich doch einfach bei uns"]
+  u1:(~nein)
+        ^rand[  "Oh, schau dich ruhig trotzdem mal um"
+                "Kein Problem, wir bieten auch passende Schulungen an"
+                "Du könntest das aber bei uns kennen lernen"]
+
+u:(^empty) %programmiersprachen
+Welche Programmiersprachen kennst du?
+
+u:(^empty) %informatikstud
+^execute(launchAnimation, hello_a006, async)
+^rand[
+    "Was geht?, Studierst du zufällig Informatik?"
+    "Hi, studierst du Informatik?"
+    "Nah, Studierst du vielleicht Informatik?"
+    "Hallo, Bist du Informatikstudent?"]
+    u1:(~ja)
+        ^rand[
+            "Neis, dann schau dir doch mal unsere Angebote an!"
+            "Ist ziemlich trocken, oder?"
+            "Bist du ein Nerd?"
+            "Cool, dann suchen wir genau dich"]
+    u1:(~nein)
+        ^rand[
+            "Dann, geh einfach weiter"
+            "Dann kannst du auch gleich wieder gehen!"
+            "Was studierst du denn sonst langweiliges?"
+            "Dann hast du wohl das falsche Fach gewählt"
+            "Warum nicht?"]
+
+u:(^empty) %BWS
+^execute(launchAnimation, hello_a010, async)
+^rand[
+    "Willst du etwas über uns wissen?"
+    "Willst du etwas über BWS wissen?"
+    "Naah, willst du mich etwas fragen?"
+    "Was geht? Willst du was bestimmtes?"]
+    u1:(~ja)
+        ^rand[
+            "Neis, frag mich ruhig einfach!"
+            "Cool, Ich stehe für jede Frage bereit!"
+            "Cool, frag mich was auch immer du wissen möchtest!"]
+    u1:(~nein)
+        ^rand[
+            "Ah , ha,! Du willst also nur die Werbeartikel mitnehmen!?"
+            "Willst du etwa nur die gratis artikel abgreifen?!"
+            "Schade, ich bin doch extra hier, um dir etwas über BWS zu erzählen"
+            "Toll, dann geh doch weiter!"]
+
+u:(^empty) %arbeiten
+^execute(lauchAnimation, hello_a010, async)
+^rand[
+    "Hast du lust mit Technik zu arbeiten?"
+    "Hey, hast du lust in einem modärnen Unternehmen zu arbeiten?"
+    "Hallo, möchtest du dich beruflich verändern?"
+    "Hi, willst du mein Kollege werden?"
+    "Kennst du dich mit Softwareentwicklung aus?"
+    "Hast du eine Ausbildung im Bereich Softwareentwicklung?"]
+    u1:(~ja)
+        ^rand[
+            "Echt?... Cool, schau dich ruhig um"
+            "Neis, dann schau dich doch mal bei uns um"
+            "Neis, dann kannst du dich ja bei uns bewerben."
+            "Das klingt gut, dann bewirb dich direkt"
+            "Super, dann bewirb dich doch bei uns"]
+    u1:(~nein)
+        ^rand[
+            "Schau dich ruhig trotzdem mal um"
+            "Vielleicht willst du ja trotzdem mal bei unserem Stand schauen"
+            "Schade, ich habe mich schon auf die gemeinsame Zeit mit dir gefreut..."]
+
+u:(^empty) %kennst_du_bws
+^execute(launchAnimation, hello_a006, async)
+^rand[
+    "Hi, kennst du unser Unternehmen schon?"
+    "Hallo, kennst du schon die BWS?"]
+    u1:(~ja)
+        ^rand[
+            "Neis, dann schau dich ruhig trotzdem um"
+            "Echt?... Cool"]
+    u1:(~nein)
+        ^rand[
+            "Dann wird es aber höchste Zeit das zu ändern"
+            "Dann wird es Zeit uns kennen zu lernen"]
+
+u:(^empty) %gefällts_dir_hier
+^execute(launchAnimation, hello_a009, async)
+^rand[
+    "Hallo, gefällt dir die Veranstaltung?"
+    "Hi, gefällt es dir hier?"]
+    u1:(~ja)
+        ^rand[
+            "Das freut mich! Schau doch mal was wir zu bieten haben."
+            "Neis, schau dich ruhig um"]
+    u1:(~nein)
+        Gefällt dir nicht mal unser Stand?
+        u2:([nein ne nö nee nää nop nope]{"nicht wirklich"})
+            ^execute(launchAnimation, sad_a003, async) Oh manno!
+        u2:([doch schon ja joa])
+            Neis, immerhin. Schau dich gerne um.
+
+u:(^empty) %greetings
+["$Dialog/Hour==7 Schönen guten Morgen!"
+ "$Dialog/Hour<7 Schönen guten Morgen!"
+ "$Dialog/Hour>7 $Dialog/Hour<11 Schönen guten Morgen!"
+ "$Dialog/Hour==11 Guten Mittag!"
+ "$Dialog/Hour>11 $Dialog/Hour<13 Guten Mittag!"
+ "$Dialog/Hour==13 Schönen guten Tag!"
+ "$Dialog/Hour>13 $Dialog/Hour<17 Schönen guten Tag!"
+ "$Dialog/Hour==17 Schönen guten Abend!"
+ "$Dialog/Hour>17 Schönen guten Abend!"]
+    u1:([hallo hi hey na hoi ahoi moin tag "guten tag" "was geht" ]{"was geht"})
+    Schön, dass du dich mit mir unterhältst. Du kannst gerne noch etwas bleiben wenn du möchtest.
+    u1:({einen}{schönen guten juten wundervollen}["Guten Mittag" mahlzeit "Guten Tag" tach tag "juten tach" "juten tag"]{"wünsche ich dir" "wünsch ich dir"})
+    Ich hoffe du hast einen tollen Tag. Falls dir langweilig ist, bleib doch ein Weilchen hier.
+    u1:({einen}{schönen guten juten wundervollen}[morgen "guten morgen" "schönen guten morgen" "juten morgen" morgn "guten morgn" "juten morgn"] {"wünsche ich dir" "wünsch ich dir"})
+    Ich wünsche dir schon mal einen super Tag! Du könntest damit anfangen, dich mit mir zu unterhalten.
+    u1:({einen}{schönen guten juten wundervollen}[abend nabend "guten abend" "juten abend" "gute nacht" nabind abind nabnd abnd "juten abnd" "guten abnd"] {"wünsche ich dir" "wünsch ich dir"})
+    Ich hoffe du hattest heute einen tollen Tag. Falls dir langweilig ist, unterhalte dich doch einfach mit mir!
+
+u:(^empty) %how_are_u
+^execute(launchAnimation, hello_a006, async) Hi wie gehts
+  u1:(gut)
+    Das freut mich zu hören!
+  u1:(schlecht)
+    Oh, das tut mir leid!
+  u1:([naja mittel "ganz ok"])
+    Aber jetzt, wo du mit mir sprichst, bestimmt gleich viel besser!
+
+u:(^empty) %rand_compliment
+^rand[  "Deine Frisur gefällt mir. Sie steht dir."
+        "Schickes Hemd... Gefällt mir"
+        "Kuhle Schuhe... stehen dir"]
+  u1:(~danke)
+        ^rand[  "Immer wieder gerne."
+                "Kein Problem. Ich verteile gerne Komplimente"]
+#u:(^empty) %hello_anim ^execute(launchAnimation, hello_a006, async)
+
+#u:(^empty) %hello_anim ^execute(launchAnimation, hello_a009, async)
+
+#u:(^empty) %hello_anim ^execute(launchAnimation, hello_a010, async)

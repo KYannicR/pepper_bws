@@ -1,0 +1,15 @@
+topic: ~attraction()
+
+u:(^empty) %random2 Dein Schnührsänkl ist offen!
+
+u:(^empty) %random3 Starr mich nicht so an!
+
+u:(^empty) %hello_anim ^execute(launchAnimation, hello_a006, async) Komm ruhig näher ran
+
+u:(^empty) %hello_anim ^execute(launchAnimation, hello_a009, async) Hi, komm doch mal rüber
+
+u:(^empty) %hello_anim ^execute(launchAnimation, hello_a010, async) Huh Huh
+
+u:(^empty) %look_anim ^execute(launchAnimation, looking_up_left_hand_b001, async) Hier ist aber viel los heute.
+
+u:(^empty) %look_anim ^execute(launchAnimation, looking_up_right_hand_b001, async) Hier ist aber viel los heute.
