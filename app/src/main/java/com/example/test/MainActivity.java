@@ -59,7 +59,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     private QiContext qiContext;
     private QiChatbot qiChatbot;
     private TouchSensor headTouchSensor;
-    private Bookmark proposalBookmark;
     private final List<Double> ranges = new ArrayList<>();
     private HumanAwareness humanAwareness;
     private int humans;
@@ -68,14 +67,14 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     private MediaPlayer mediaPlayer = new MediaPlayer();
     private Animate tickleAnim1, tickleAnim2;
     public final Lock animLock = new ReentrantLock();
-    private boolean timersActive = false;
+    //private boolean timersActive = false;
+    private Map<String, Bookmark> proactiveBookmarks, attractionBookmarks, solitaryBookmarks;
+    private Topic proTop, attTop, solTop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //robot = new Robot();
-        timersActive = false;
         super.onCreate(savedInstanceState);
-        // Register the RobotLifecycleCallbacks to this Activity.
         //QiSDK.register(this, robot);
         QiSDK.register(this, this);
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.ALWAYS);
@@ -83,9 +82,8 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         kar_button = findViewById(R.id.kar_button);
         ent_button = findViewById(R.id.ent_button);
         jobs_button = findViewById(R.id.jobs_button);
-        //////////////////////////////////////////////
+        //TODO
         ent_button.setVisibility(View.GONE);
-        //////////////////////////////////////////////
     }
 
 
@@ -98,9 +96,8 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         kar_button = findViewById(R.id.kar_button);
         ent_button = findViewById(R.id.ent_button);
         jobs_button = findViewById(R.id.jobs_button);
-        //////////////////////////////////////////////
+        //TODO
         ent_button.setVisibility(View.GONE);
-        //////////////////////////////////////////////
     }
 
     @Override
@@ -113,14 +110,20 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     @Override
     public void onRobotFocusGained(QiContext theContext) {
         Log.d("gain", "onRobotFocusGained");
-        timersActive = false;
         this.qiContext = theContext;
         runChat();
+        proTop = TopicBuilder.with(qiContext).withResource(R.raw.proactive).build();
+        attTop = TopicBuilder.with(qiContext).withResource(R.raw.attraction).build();
+        solTop = TopicBuilder.with(qiContext).withResource(R.raw.solitary).build();
+        proactiveBookmarks = proTop.getBookmarks();
+        attractionBookmarks = attTop.getBookmarks();
+        solitaryBookmarks = solTop.getBookmarks();
         humanAwareness = qiContext.getHumanAwareness();
         initHeadTouchedListener();
         initButtonListeners();
         initListeningListener();
         startTimers();
+        startSolitary();
     }
 
     @Override
@@ -134,6 +137,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         }
         if (humanAwareness != null) {
             humanAwareness.removeAllOnHumansAroundChangedListeners();
+            humanAwareness.removeAllOnEngagedHumanChangedListeners();
         }
         if (tickleAnim1 != null) {
             tickleAnim1.removeAllOnStartedListeners();
@@ -155,6 +159,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         Map<String, QiChatExecutor> executors = new HashMap<>();
         // Map the executor name from the topic to our qiChatbotExecutor
         executors.put("launchAnimation", new MyQiChatExecutor(qiContext));
+        executors.put("playSound", new MyQiChatSound(qiContext));
         // Set the executors to the qiChatbot
         qiChatbot.setExecutors(executors);
     }
@@ -196,22 +201,33 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     }
 
     private void speak(String topicName) {
-        Topic topic;
-        if(topicName.equals("proactive")) {
-            topic  = TopicBuilder.with(qiContext).withResource(R.raw.proactive).build();
-        } else if (topicName.equals("attraction")) {
-            topic  = TopicBuilder.with(qiContext).withResource(R.raw.attraction).build();
-        } else {
-            topic = TopicBuilder.with(qiContext).withResource(R.raw.solitary).build();
-        }
-        Map<String, Bookmark> bookmarks = topic.getBookmarks();
         Object rndKey;
-        rndKey = getRndKey(bookmarks);
-        proposalBookmark = bookmarks.get(rndKey);
-        sayProposal();
-    }
-
-    private void sayProposal() {
+        Bookmark proposalBookmark;
+        if(topicName.equals("proactive")) {
+            rndKey = getRndKey(proactiveBookmarks);
+            proposalBookmark = proactiveBookmarks.get(rndKey);
+            proactiveBookmarks.remove(rndKey);
+            if(proactiveBookmarks.isEmpty()){
+                proactiveBookmarks = proTop.getBookmarks();
+            }
+        } else if (topicName.equals("attraction")) {
+            rndKey = getRndKey(attractionBookmarks);
+            proposalBookmark = attractionBookmarks.get(rndKey);
+            attractionBookmarks.remove(rndKey);
+            if(attractionBookmarks.isEmpty()){
+                attractionBookmarks = attTop.getBookmarks();
+            }
+        } else {
+            rndKey = getRndKey(solitaryBookmarks);
+            proposalBookmark = solitaryBookmarks.get(rndKey);
+            solitaryBookmarks.remove(rndKey);
+            if(solitaryBookmarks.isEmpty()){
+                solitaryBookmarks = solTop.getBookmarks();
+            }
+        }
+        //Map<String, Bookmark> bookmarks = topic.getBookmarks();
+        //rndKey = getRndKey(bookmarks);
+        //proposalBookmark = bookmarks.get(rndKey);
         qiChatbot.goToBookmark(proposalBookmark, AutonomousReactionImportance.LOW, AutonomousReactionValidity.DELAYABLE);
     }
 
@@ -246,8 +262,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     }
 
     private int findHumansAround() throws ExecutionException {
-        // Here we will find the humans around the robot.
-        // Get the humans around the robot.
         Future<List<Human>> humansAroundFuture = humanAwareness.async().getHumansAround();
         humansAroundFuture.andThenConsume(humansAround -> {
             Log.i("TAG", humansAround.size() + " human(s) around.");
@@ -264,47 +278,31 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         Frame robotFrame = actuation.robotFrame();
         for (int i = 0; i < humans.size(); i++) {
             Human human = humans.get(i);
-
-            //Integer age = human.getEstimatedAge().getYears();
-            //Gender gender = human.getEstimatedGender();
-            //ExcitementState excitementState = human.getEmotion().getExcitement();
             Frame humanFrame = human.getHeadFrame();
-
             double distance = computeDistance(humanFrame, robotFrame);
             ranges.add(distance);
-
-            //Log.i("TAG", "Age: " + age + " year(s)");
-            //Log.i("TAG", "Gender: " + gender);
-            //Log.i("TAG", "Distance: " + distance + " meter(s).");
-            //Log.i("TAG", "Excitement state: " + excitementState);
-
         }
     }
 
     private double computeDistance(Frame humanFrame, Frame robotFrame) {
-        // Get the TransformTime between the human frame and the robot frame.
         TransformTime transformTime = humanFrame.computeTransform(robotFrame);
-        // Get the transform.
         Transform transform = transformTime.getTransform();
-        // Get the translation.
         Vector3 translation = transform.getTranslation();
-        // Get the x and y components of the translation.
         double x = translation.getX();
         double y = translation.getY();
-        // Compute the distance and return it.
         return Math.sqrt(x * x + y * y);
     }
 
     private boolean testProactive(List<Double> ranges){
         for (Double curr : ranges) {
-            if (curr <= 1.5) return true;
+            if (curr <= 1.8) return true;
         }
         return false;
     }
 
     private boolean testAttraction(List<Double> ranges){
         for (Double curr : ranges) {
-            if (curr < 2.5 && curr > 1.5) return true;
+            if (curr > 1.8) return true; //curr < 2.5 &&
         }
         return false;
     }
@@ -330,63 +328,32 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         mediaPlayer.reset();
         mediaPlayer = MediaPlayer.create(qiContext, mediaResource);
         mediaPlayer.start();
-
     }
 
     public void stopTimers() {
-        if(timersActive) {
-            solitaryTimer.cancel();
-            attractionTimer.cancel();
-            proactiveTimer.cancel();
-        }
+        solitaryTimer.cancel();
+        attractionTimer.cancel();
+        proactiveTimer.cancel();
+        //timersActive = false;
     }
 
     public void startTimers() {
         proactiveTimer = new Timer();
         proactiveTimer.schedule(new TimerTask() {
             public void run() {
-                try {
-                    humans = findHumansAround();
-                    proactiveZone = testProactive(ranges);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-                if (humans != 0 && proactiveZone) {
-                    animLock.lock();
-                    try {
-                        speak("proactive");
-                    } finally {
-                        animLock.unlock();
-                    }
-                }
-                ranges.clear();
+                tryProactive();
             }
-        }, 0, 21000);
+        }, 19000, 19000);
 
         attractionTimer = new Timer();
         attractionTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                try {
-                    humans = findHumansAround();
-                    attractionZone = testAttraction(ranges);
-                    proactiveZone = testProactive(ranges);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-                if (humans != 0 && attractionZone && !proactiveZone) {
-                    animLock.lock();
-                    try {
-                        speak("attraction");
-                    } finally {
-                        animLock.unlock();
-                    }
-                }
-                ranges.clear();
+                tryAttraction();
             }
-        }, 0, 40000);
+        }, 21000, 21000);
 
-        solitaryTimer = new Timer();
+        /*solitaryTimer = new Timer();
         solitaryTimer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -403,7 +370,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
                     try {
                         runOnUiThread(() -> {
                             setImage();
-                            //ent_button.setVisibility(View.GONE);
+                            //TODO ent_button.setVisibility(View.GONE);
                             kar_button.setVisibility(View.GONE);
                             jobs_button.setVisibility(View.GONE);
                         });
@@ -420,8 +387,62 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
                 }
                 ranges.clear();
             }
-        }, 125000, 125000);
-        timersActive = true;
+        }, 125000, 125000);*/
+        //timersActive = true;
+    }
+
+    private void startSolitary() {
+        solitaryTimer = new Timer();
+        solitaryTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                animLock.lock();
+                try {
+                    hideUI();
+                    speak("solitary");
+                } finally {
+                    animLock.unlock();
+                    showUI();
+                }
+            }
+        }, 15000, 60000);
+    }
+
+    private void tryProactive(){
+        try {
+            humans = findHumansAround();
+            proactiveZone = testProactive(ranges);
+            ranges.clear();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        if (humans != 0 && proactiveZone) {
+            animLock.lock();
+            try {
+                speak("proactive");
+            } finally {
+                animLock.unlock();
+            }
+        }
+    }
+
+    private void tryAttraction(){
+        try {
+            humans = findHumansAround();
+            attractionZone = testAttraction(ranges);
+            proactiveZone = testProactive(ranges);
+            ranges.clear();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        if (humans != 0 && attractionZone && !proactiveZone) {
+            animLock.lock();
+            try {
+                speak("attraction");
+            } finally {
+                animLock.unlock();
+            }
+        }
     }
 
     private void initHeadTouchedListener() {
@@ -439,6 +460,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     }
 
     private void initButtonListeners() {
+
         kar_button.setOnClickListener(v -> {
             stopTimers();
             Intent activity2Intent = new Intent(MainActivity.this, CareerActivity.class);
@@ -458,45 +480,77 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             finishAffinity();
         });
 
-        /*humanAwareness.addOnHumansAroundChangedListener(changedHumans -> {
-            stopTimers();
-            startTimers();
-        });*/
+        humanAwareness.addOnHumansAroundChangedListener(changedHumans -> {
+            if(changedHumans.size() != 0){
+                stopTimers();
+                animLock.lock();
+                try {
+                    hideUI();
+                    speak("proactive");
+                } finally {
+                    animLock.unlock();
+                    showUI();
+                }
+                startTimers();
+            } else {
+                startSolitary();
+                Log.i("Humans", "Found no humans after change.");
+            }
+        });
+
+        humanAwareness.addOnEngagedHumanChangedListener(engagedHuman -> {
+            if(engagedHuman != null){
+                stopTimers();
+                animLock.lock();
+                try {
+                    hideUI();
+                    speak("proactive");
+                } finally {
+                    animLock.unlock();
+                    showUI();
+                }
+                startTimers();
+            }
+            if(engagedHuman == null){
+                startSolitary();
+                Log.i("Engaged", "Engaged human(s) = null.");
+            }
+        });
     }
 
     private void initListeningListener() {
         chat.addOnListeningChangedListener(listening -> {
-            //show Buttons while hearing
-            runOnUiThread(() -> {
-                if(listening.equals(true)) {
-                    //setContentView(R.layout.activity_main);
-                    clearImage();
-                    //ent_button.setVisibility(View.VISIBLE);
-                    kar_button.setVisibility(View.VISIBLE);
-                    jobs_button.setVisibility(View.VISIBLE);
-                } else {
-                    setImage();
-                    //ent_button.setVisibility(View.GONE);
-                    kar_button.setVisibility(View.GONE);
-                    jobs_button.setVisibility(View.GONE);
-                    //setContentView(R.layout.activity_speaking);
-                }
-            });
+            //show Buttons while listening
+            if(listening.equals(true)) {
+                showUI();
+            } else {
+                hideUI();
+            }
         });
     }
 
-    private void setImage(){
+    private void hideUI(){
         runOnUiThread(() -> {
+            //setImage
             ImageView test = findViewById(R.id.splashImageView);
             test.setImageResource(R.drawable.speaking);
             test.setVisibility(View.VISIBLE);
+
+            //TODO ent_button.setVisibility(View.GONE);
+            kar_button.setVisibility(View.GONE);
+            jobs_button.setVisibility(View.GONE);
         });
     }
 
-    private void clearImage(){
+    private void showUI(){
         runOnUiThread(() -> {
+            //clearImage
             ImageView test = findViewById(R.id.splashImageView);
             test.setVisibility(View.GONE);
+
+            //TODO ent_button.setVisibility(View.VISIBLE);
+            kar_button.setVisibility(View.VISIBLE);
+            jobs_button.setVisibility(View.VISIBLE);
         });
     }
 }

@@ -4,20 +4,23 @@ topic: ~proactive()
 concept:(ja) {Ähm Äh Ehm Eh Öh Öhm hm mh} {denke "denke mal" wahrscheinlich eher eigentlich} [Ja Jaa Joa Klar Klaro Immer "Wenns sein muss" Natürlich Absolut Jap Jop Jo Yo Yop] {schon}
 concept:(nein) {Ähm Äh Ehm Eh Öh Öhm hm mh} {eher wahrscheinlich eigentlich} [nöö nää Ne Nee Nä Neh Nö Nein "Nicht wirklich" "Nich wirklich" "Eigentlich nicht" Nicht] {Eigentlich} {nicht} {wirklich}
 concept:(danke) {oh uh} {ähm äh} {Vielen} {Herzlichen} [Danke Dank Dankeschön Dankee ßänks ssänks Dankä ssänk ßänk thank thanks dange] {vielmals sehr dir you jou ju}
-concept:(gut) {Ähm Äh Ehm Eh Öh Öhm hm mh} {eigentlich denke "ich denke" eher} {ganz ziemlich voll sehr super} {gut toll super spitzenmäßig supi fantastisch}
+concept:(gut) {Ähm Äh Ehm Eh Öh Öhm hm mh} {eigentlich denke "ich denke" eher} {ganz ziemlich voll sehr super} [gut toll super spitzenmäßig supi fantastisch top]
+concept:(schlecht) {Ähm Äh Ehm Eh Öh Öhm hm mh} {eigentlich denke "ich denke" eher} {ganz ziemlich voll sehr super} [schlecht "nicht so" "nicht so toll" mies übel kacke scheiße krank]
+concept:(hi) [Hai Hei Hi Hey Hej Hey Hi Hey Hei Hay Hai]
+concept:(hallo) [Hai Hei Hallo Hallu Hi Hey Hej "Guten Morgen" Morgen "Guten Tag" Servus "Nah du" Nah Grüße "Grüß dich" "Grüs dich"] {Pepper}!
 
-u:(^empty) %wo_am_liebsten
+u:(^empty) %wo_am_liebsten_pro
 ^execute(launchAnimation, hello_a009, async) Hi, Möchtest du lieber an unserem Standort in Wolfsburg, Braunschweig oder Hannover arbeiten?
-  u1:("{lieber eher "am liebsten" "am ehesten" wahrscheinlich eher} {in bei nahe} {"der nähe"} Hannover")
+  u1:("{"ich denke" denke "denke mal"} {lieber eher "am liebsten" "am ehesten" wahrscheinlich eher} {in bei nahe} {"der nähe"} Hannover")
         Dann bewirb dich doch gleich dort
-  u1:("{lieber eher "am liebsten" "am ehesten" wahrscheinlich eher} {in bei nahe} {"der nähe"} Braunschweig")
+  u1:("{"ich denke" denke "denke mal"} {lieber eher "am liebsten" "am ehesten" wahrscheinlich eher} {in bei nahe} {"der nähe"} Braunschweig")
         Cool, gerne kannst du dich dort bewerben
-  u1:("{lieber eher "am liebsten" "am ehesten" wahrscheinlich eher} {in bei nahe} {"der nähe"} Wolfsburg")
-        Neis, da ist auch unser Hauptsitz
-  u1:("{Bei} {Gar überhaupt absolut} [Keiner Keins Nichts Keinem Nirgends nicht] {davon "von denen" da}")
+  u1:("{"ich denke" denke "denke mal"} {lieber eher "am liebsten" "am ehesten" wahrscheinlich eher} {in bei nahe} {"der nähe"} Wolfsburg")
+        Neis, genau da ist auch unser Hauptsitz
+  u1:("{"ich denke" denke "denke mal"} {Bei} {Gar überhaupt absolut} [Keiner Keins Nichts Keinem Nirgends nicht] {davon "von denen" da}")
         Oh, das ist aber Schade
 
-u:(^empty) %interesse
+u:(^empty) %interesse_pro
 ^execute(launchAnimation, hello_a009, async)
 ^rand[
         "Hey, Hast du Lust auf neue Projekte?"
@@ -35,7 +38,7 @@ u:(^empty) %interesse
         ^rand[  "Oh, schau dich ruhig trotzdem mal um"
                 "Dann kannst du auch gleich wieder gehen!"]
 
-u:(^empty) %kennst_du
+u:(^empty) %kennst_du_pro
 ^execute(launchAnimation, hello_a009, async)
 ^rand[  "Kennst du dich zufällig mit Frejmwörks wie heibernejt oder Sbring aus?"
         "Kennst du dich vielleicht mit Ri eckt oder engjular aus? "
@@ -48,10 +51,10 @@ u:(^empty) %kennst_du
                 "Kein Problem, wir bieten auch passende Schulungen an"
                 "Du könntest das aber bei uns kennen lernen"]
 
-u:(^empty) %programmiersprachen
+u:(^empty) %programmiersprachen_pro
 Welche Programmiersprachen kennst du?
 
-u:(^empty) %informatikstud
+u:(^empty) %informatikstud_pro
 ^execute(launchAnimation, hello_a006, async)
 ^rand[
     "Was geht?, Studierst du zufällig Informatik?"
@@ -72,7 +75,7 @@ u:(^empty) %informatikstud
             "Dann hast du wohl das falsche Fach gewählt"
             "Warum nicht?"]
 
-u:(^empty) %BWS
+u:(^empty) %BWS_pro
 ^execute(launchAnimation, hello_a010, async)
 ^rand[
     "Willst du etwas über uns wissen?"
@@ -91,7 +94,7 @@ u:(^empty) %BWS
             "Schade, ich bin doch extra hier, um dir etwas über BWS zu erzählen"
             "Toll, dann geh doch weiter!"]
 
-u:(^empty) %arbeiten
+u:(^empty) %arbeiten_pro
 ^execute(lauchAnimation, hello_a010, async)
 ^rand[
     "Hast du lust mit Technik zu arbeiten?"
@@ -113,7 +116,7 @@ u:(^empty) %arbeiten
             "Vielleicht willst du ja trotzdem mal bei unserem Stand schauen"
             "Schade, ich habe mich schon auf die gemeinsame Zeit mit dir gefreut..."]
 
-u:(^empty) %kennst_du_bws
+u:(^empty) %kennst_du_bws_pro
 ^execute(launchAnimation, hello_a006, async)
 ^rand[
     "Hi, kennst du unser Unternehmen schon?"
@@ -127,7 +130,7 @@ u:(^empty) %kennst_du_bws
             "Dann wird es aber höchste Zeit das zu ändern"
             "Dann wird es Zeit uns kennen zu lernen"]
 
-u:(^empty) %gefällts_dir_hier
+u:(^empty) %gefällts_dir_hier_pro
 ^execute(launchAnimation, hello_a009, async)
 ^rand[
     "Hallo, gefällt dir die Veranstaltung?"
@@ -143,7 +146,7 @@ u:(^empty) %gefällts_dir_hier
         u2:([doch schon ja joa])
             Neis, immerhin. Schau dich gerne um.
 
-u:(^empty) %greetings
+u:(^empty) %greetings_pro
 ["$Dialog/Hour==7 Schönen guten Morgen!"
  "$Dialog/Hour<7 Schönen guten Morgen!"
  "$Dialog/Hour>7 $Dialog/Hour<11 Schönen guten Morgen!"
@@ -153,33 +156,31 @@ u:(^empty) %greetings
  "$Dialog/Hour>13 $Dialog/Hour<17 Schönen guten Tag!"
  "$Dialog/Hour==17 Schönen guten Abend!"
  "$Dialog/Hour>17 Schönen guten Abend!"]
-    u1:([hallo hi hey na hoi ahoi moin tag "guten tag" "was geht" ]{"was geht"})
+    u1:([~hallo ~hi "[hallo hi hey na hoi ahoi moin tag "guten tag" "was geht"]{"was geht"}"])
     Schön, dass du dich mit mir unterhältst. Du kannst gerne noch etwas bleiben wenn du möchtest.
-    u1:({einen}{schönen guten juten wundervollen}["Guten Mittag" mahlzeit "Guten Tag" tach tag "juten tach" "juten tag"]{"wünsche ich dir" "wünsch ich dir"})
+    u1:([~hallo ~hi "{einen}{schönen guten juten wundervollen}["Guten Mittag" mahlzeit "Guten Tag" tach tag "juten tach" "juten tag"]{"wünsche ich dir" "wünsch ich dir"}"])
     Ich hoffe du hast einen tollen Tag. Falls dir langweilig ist, bleib doch ein Weilchen hier.
-    u1:({einen}{schönen guten juten wundervollen}[morgen "guten morgen" "schönen guten morgen" "juten morgen" morgn "guten morgn" "juten morgn"] {"wünsche ich dir" "wünsch ich dir"})
+    u1:([~hallo ~hi "{einen}{schönen guten juten wundervollen}[morgen "guten morgen" "schönen guten morgen" "juten morgen" morgn "guten morgn" "juten morgn"] {"wünsche ich dir" "wünsch ich dir"}"])
     Ich wünsche dir schon mal einen super Tag! Du könntest damit anfangen, dich mit mir zu unterhalten.
-    u1:({einen}{schönen guten juten wundervollen}[abend nabend "guten abend" "juten abend" "gute nacht" nabind abind nabnd abnd "juten abnd" "guten abnd"] {"wünsche ich dir" "wünsch ich dir"})
+    u1:([~hallo ~hi "{einen}{schönen guten juten wundervollen}[abend nabend "guten abend" "juten abend" "gute nacht" nabind abind nabnd abnd "juten abnd" "guten abnd"] {"wünsche ich dir" "wünsch ich dir"}"])
     Ich hoffe du hattest heute einen tollen Tag. Falls dir langweilig ist, unterhalte dich doch einfach mit mir!
 
-u:(^empty) %how_are_u
-^execute(launchAnimation, hello_a006, async) Hi wie gehts
-  u1:(gut)
+u:(^empty) %how_are_u_pro
+^execute(launchAnimation, hello_a006, async) ^rand["Hi, wie gehts?" "Na wie gehts denn so?" "Na, wie gehts dir?"]
+  u1:(~gut)
     Das freut mich zu hören!
-  u1:(schlecht)
+  u1:(~schlecht)
     Oh, das tut mir leid!
-  u1:([naja mittel "ganz ok"])
+  u1:([naja mittel "ganz ok" "so naja" "so lala" "so mittel" "geht so" "ganz ok" "nicht schlecht" "normal" "neutral"])
     Aber jetzt, wo du mit mir sprichst, bestimmt gleich viel besser!
 
-u:(^empty) %rand_compliment
+u:(^empty) %rand_compliment_pro
 ^rand[  "Deine Frisur gefällt mir. Sie steht dir."
         "Schickes Hemd... Gefällt mir"
         "Kuhle Schuhe... stehen dir"]
   u1:(~danke)
         ^rand[  "Immer wieder gerne."
                 "Kein Problem. Ich verteile gerne Komplimente"]
-#u:(^empty) %hello_anim ^execute(launchAnimation, hello_a006, async)
 
-#u:(^empty) %hello_anim ^execute(launchAnimation, hello_a009, async)
-
-#u:(^empty) %hello_anim ^execute(launchAnimation, hello_a010, async)
+u:(^empty) %kopf_pro
+Kann mich mal jemand am Kopf streicheln?

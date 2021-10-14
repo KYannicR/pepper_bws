@@ -1,15 +1,56 @@
 topic: ~attraction()
 
-u:(^empty) %random2 Dein Schnührsänkl ist offen!
+u:(^empty) %random1_att Dein Schnührsänkl ist offen!
 
-u:(^empty) %random3 Starr mich nicht so an!
+u:(^empty) %random2_att Starr mich nicht so an!
 
-u:(^empty) %hello_anim ^execute(launchAnimation, hello_a006, async) Komm ruhig näher ran
+u:(^empty) %hello1_att ^execute(launchAnimation, hello_a006, async) Komm ruhig näher ran
 
-u:(^empty) %hello_anim ^execute(launchAnimation, hello_a009, async) Hi, komm doch mal rüber
+u:(^empty) %hello2_att ^execute(launchAnimation, hello_a009, async) Hi, komm doch mal rüber
 
-u:(^empty) %hello_anim ^execute(launchAnimation, hello_a010, async) Huh Huh
+u:(^empty) %hello3_att ^execute(launchAnimation, hello_a010, async) Huh Huh
 
-u:(^empty) %look_anim ^execute(launchAnimation, looking_up_left_hand_b001, async) Hier ist aber viel los heute.
+u:(^empty) %look_anim_att ^execute(launchAnimation, looking_up_left_hand_b001, async) Hier ist aber viel los heute.
 
-u:(^empty) %look_anim ^execute(launchAnimation, looking_up_right_hand_b001, async) Hier ist aber viel los heute.
+u:(^empty) %look_anim_att ^execute(launchAnimation, looking_up_right_hand_b001, async) Hier ist aber viel los heute.
+
+u:(^empty) %rand_compliment_att
+^rand[  "Deine Frisur gefällt mir. Sie steht dir."
+        "Schickes Hemd... Gefällt mir"
+        "Kuhle Schuhe... stehen dir"]
+  u1:(~danke)
+        ^rand[  "Immer wieder gerne."
+                "Kein Problem. Ich verteile gerne Komplimente"]
+
+u:(^empty) %itch_att
+^execute(launchAnimation, itchi_a001, sync)
+
+u:(^empty) %chill_att
+^execute(launchAnimation, chill_a001, sync)
+
+u:(^empty) %kopf_att
+Kann mich mal jemand am Kopf streicheln?
+
+u:(^empty) %hören_att
+^execute(launchAnimation, listen_left_b001, async) Hat gerade jemand etwas gesagt? Oder bilde ich mir das nur ein?
+
+u:(^empty) %keiner_att
+^execute(launchAnimation, sad_a001, sync) ^rand["Wieso spricht denn keiner mit mir?"]
+
+u:(^empty) %kommt_att
+^execute(launchAnimation, raise_right_hand_b001, async) ^rand["Ihr könnt gerne näher kommen und euch mit mir unterhalten!"]
+
+u:(^empty) %where_att
+^execute(launchAnimation, looking_up_left_hand_b001, sync) Wo sind denn alle hin?
+
+u:(^empty) %keinerTanzen_att
+^execute(launchAnimation, sad_a001, sync) ^rand["Will jemand mal mit mir tanzen? Fragt ruhig einfach"]
+
+u:(^empty) %reden_att
+^execute(launchAnimation, chill_a001, async) Ihr könnt ruhig einfach mit mir reden.
+
+u:(^empty) %fragen_att
+Wollt mich wirklich niemand etwas fragen? Vielleicht nach einem Foto oder einem Tanz?
+
+u:(^empty) %dreaming_att
+Falls ich mal wieder vor mich hinträume, ruft einfach mal Pepper oder streichelt meinen Kopf

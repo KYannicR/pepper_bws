@@ -5,12 +5,13 @@ topic: ~standard()
 # Replying to speech
 #u:(~hello) ~hello
 # Defining extra concepts out of words or group of words
+concept:(instrument) ["[Spiel Kannst Spielst Machst Spielste] {du} {mal} {denn} {sowas} {wie} {ein irgendein irgendwas} [Instrument Musik musikalisches] {spielen machen}"]
 concept:(animals) ["Kannst du {ein} {verschiedene bestimmte} [Tiere Tier] [nachmachen zeigen nachahmen darstellen spielen]?" "[Zeig Mach Spiel] {mir mirn} {doch} {mal maln} [deine ein dein irgendein] [Tier Tiere] {vor nach}!"]
 concept:(hi) [Hai Hei Hi Hey Hej Hey Hi Hey Hei Hay Hai]
 concept:(hallo) [Hai Hei Hallo Hallu Hi Hey Hej "Guten Morgen" Morgen "Guten Tag" Servus "Nah du" Nah Grüße "Grüß dich" "Grüs dich"] {Pepper}!
 concept:(smalltalkf) ["wie gehts {dir} {so} {heute}" "wie geht es dir {so} {heute}" "alles gut?"]
 concept:(smalltalka) ["mir gehts gut danke" "bei mir ist alles top und bei dir" "Jetzt wo du hier bist schon viel besser"]
-concept:(goodbye) [Bye "bye bye" "bei bei" "bai bai" Tschüss Ciao Tschau "bis dann" "bis bald" "bis später" byebye "man sieht sich" "hau rein" "{einen} schönen Tag {dir} {noch}"] {Pepper}
+concept:(goodbye) [Bye "bye bye" "bei bei" "bai bai" Tschüss Ciao Tschau "bis dann" "bis bald" "bis später" byebye "man sieht sich" "hau rein" "{einen} [schönen guten] Tag {wünsche wünsch} {ich} {dir} {noch}"] {Pepper}
 #concept:(animation_sad) ^rand["^run(animations/Stand/Emotions/Negative/Sad_1)" "^run(animations/Stand/Emotions/Negative/Sad_1)"]
 #concept:(animation_angry) ^rand["^run(animations/Stand/Emotions/Negative/Angry_1)" "^run(animations/Stand/Emotions/Negative/Angry_2)" "^run(animations/Stand/Emotions/Negative/Angry_3)" "^run(animations/Stand/Emotions/Negative/Angry_4)" "^run(animations/Stand/Gestures/Angry_1)" "^run(animations/Stand/Gestures/Angry_2)" "^run(animations/Stand/Gestures/Angry_3)"]
 #concept:(animation_anxious) ["^run(animations/Stand/Emotions/Negative/Anxious_1)"]
@@ -22,13 +23,14 @@ concept:(goodbye) [Bye "bye bye" "bei bei" "bai bai" Tschüss Ciao Tschau "bis d
 # Replying to speech
 #########Begrüßungen und Verabschiedungen######################
 u:(~smalltalkf) ~smalltalka
-u:(~hallo) ^rand[Moin Hallo Grüße Hi]
+u:([~hallo ~hi]) ^rand[Moin Hallo Grüße Hi]
 u:(~goodbye) Mach's gut, ich hoffe wir sehen uns bald wieder!
 
 #########Wiederholen#######################
 u:(["{hä} Antworte {mir} {doch} {jetzt} {endlich} {mal}"
     "{hä} [Willst kannst] du {mir} nicht {jetzt} {endlich} {mal} antworten?"
-    "{hä} [Warum wieso weshalb] antwortest du {mir} nicht {jetzt} {endlich} {mal}"])
+    "{hä} [Warum wieso weshalb] antwortest du {mir} nicht {jetzt} {endlich} {mal}"
+    "[Die Der Das Pepper Peppa "Der Roboter" "Das ding"] [antwortet sagt macht] {ja} {gar überhaupt so} [nichts nicht]"])
 Ich habe das leider nicht ganz verstanden! Kannst du das nochmal sagen?
 
 #########Antwortet ja gar nicht#######################
@@ -75,15 +77,16 @@ Sorry manchmal schweife ich etwas ab. Wenn du mir über den Kopf streichelst bin
 u:([Pepper päppa päpa päpper peppa pepa peppar päppar pepar])
 ^rand["Das bin ich, aber frag ruhig einfach drauf los, ich bin ja nicht Alexa oder so"
     "Das bin ich, aber frag ruhig einfach drauf los, ich bin ja nicht Siri oder so"
-    "Das bin ich, aber frag ruhig einfach drauf los, ich bin ja nicht der Google Assistent oder so"]
+    "Das bin ich, aber frag ruhig einfach drauf los, ich bin ja nicht der Google Assistent oder so"
+    "Das bin ich!"]
 
 ###########Hörtest#############################
 u:(["[Verstehst Hörst] du {denn} {überhaupt} {was} [mich ich]  {eigentlich} {denn} {überhaupt} {sage}?"
     "Test, {eins}, {zwei}, {drei}, {vier}"
-    "Kannst du mich [hören verstehen]?"
+    "Kannst du mich {denn} {eigentlich} {überhaupt} [hören verstehen]?"
     "{hallo} test {eins}{zwei}{zwo}{drei}{vier}{hallo}{hallo}"])
-^rand["Ja meine Ohren funktionieren Perfekt"
-    "Ja klar und deutlich"]
+^rand["Meine Ohren funktionieren Perfekt"
+    "Klar und deutlich"]
 
 #########Sag mal was##########################
 u:(["{Pepper} [Sag Erzähl Mach Hau] {mal ma} irgendwas {raus}"
@@ -99,10 +102,10 @@ u:("{~hi} Siri") Sehe ich etwa aus wie Google?
 
 u:("{~hi} ["Alexa" "Echo" "Roboter" "Computer"]") Sehe ich etwa aus wie eine Alexa? Frag einfach drauf los, sobald ich blau leuchte.
 
-u:("[Der die das pepper du] {pepper roboter ding} [ist bist] {ja} [nice lustig krass süß niedlich knuffig cool spitze toll klasse]")
-Vielen Dank für das Kompliment
+u:("[Der die das pepper du] {pepper roboter ding} [ist bist] {ja} [sexy hübsch nice lustig krass süß niedlich knuffig cool spitze toll klasse]")
+Vielen Dank für das Kompliment!
 
-u:("{~hallo} ["Wer bist du {denn} {eigentlich}?" "Wie heißt du {denn} {eigentlich}?" "Wie ist {denn} {eigentlich} dein Name?"]")
+u:("{Nah Na Naa} {~hallo} ["Wer bist du {denn} {überhaupt eigentlich}?" "Wie heißt du {denn} {überhaupt eigentlich}?" "Wie ist {denn} {überhaupt eigentlich} dein Name?"]")
 ^rand["Ich heiße Pepper!" "Mein Name ist Pepper!" "Ich bin Pepper!"]
 
 u:([~animals "[Zeig Mach Spiel] {mir} {mal} {einen ein} [Gorilla Tier] {nach}" "Kannst du {mir} {mal} {einen ein} [Gorilla Tier] [zeigen machen spielen nachahmen]"])
@@ -116,6 +119,111 @@ Ok ^execute(launchAnimation, dog_a001, sync) wie war das?
 
 u:([~animals "[Zeig Mach Spiel] {mir} {mal} {eine ne} [Maus Tier] {nach}" "Kannst du {mir} {mal} {eine ne} [Maus Tier] [zeigen machen spielen nachahmen]"])
 Ok ^execute(launchAnimation, mouse_a001, sync) wie war das?
+
+u:(["[Warum Wieso Weshalb] ist {hier} [hier "bei euch" "am Stand" "an eurem Stand"] {"bei euch" "am Stand"} {denn} {eigentlich} {überhaupt} {fast} {gar} nichts los"
+    "[Warum Wieso Weshalb] ist {hier} [hier "bei euch" "am Stand" "an eurem Stand"] {"bei euch" "am Stand"} {denn} {eigentlich} {überhaupt} {fast} {gar} nicht {so} viel los?"
+    "[Warum Wieso Weshalb] ist [hier "am Stand" "an eurem Stand" "bei euch"] {denn} {eigentlich} {überhaupt} {fast} {gar} [keiner niemand]"])
+Weiß ^execute(lauchAnimation, sad_a001, async) ich auch nicht, vielleicht bin ich so uninteressant!
+
+u:(["Was macht [ihr man] {denn} {überhaupt} {so} bei {der eurer diesem dieser eurem euerm} [BWS Firma Unternehmen]"
+    "Was wird {denn} [bei in von mit über] {der eurer euer eurem euerm dieser diesem} [BWS Firma Unternehmen] {überhaupt} {denn} {so} [gesucht gemacht]"
+    "Was macht {denn} {der die eurer euer dieses diese dieser eure eurem euerm} [BWS Firma Unternehmen] {überhaupt} {so}"])
+Falls du dich für eine Stelle interessierst, klick einfach mal auf den Knopf mit der Aufschrift, Wir suchen... vielleicht findest du etwas, was dich anspricht!
+
+u:(["Was ist {denn} {bei} [euch hier] {am} {Stand} {so} los?" "Was [geht läuft] {denn} {so} {bei} [euch hier] {hier} {am} {Stand} {so} {ab}?"])
+Na wir bewerben hier am Stand die coolste Firma der Welt, sieht man doch!
+
+u:([~instrument "[Spiel Kannst Spielst Machst] {du} {mal} {auch} {sowas} {wie} {ein eine die} [Instrument Gitarre Guitarre Guitar] {spielen machen}"])
+Klar, schau mal ^execute(launchAnimation, guitar_a001, sync). Leider ist es nur eine Luftgitarre.
+
+u:([~instrument "[Spiel Kannst Spielst Machst] {du} {mal} {auch} {sowas} {wie} {ein eine die das} [Instrument Saxophon Saxofon Saxophone] {spielen machen}"])
+Klar, hier ^execute(launchAnimation, saxophone_a001, sync). Aber irgendwie kommt kein Ton aus meinem Saxofon.
+
+u:([~instrument "[Spiel Kannst Spielst Machst] {du} {mal} {auch} {sowas} {wie} {ein eine die das} [Instrument Trommel Trommelwirbel Schlagzeug Bongo] {spielen machen}"])
+Klar, hier ^execute(launchAnimation, drumroll_b001, sync). Aber ohne eine echte Trommel ist das ganz schön langweilig.
+
+u:(["[Spiel Kannst Spielst Machst] {du} {mal} {irgendeinen einen eine} [Sport Sportart Basketball Ball Ballsport] {machen spielen zeigen}?"])
+Beim Basketball ^execute(launchAnimation, basketball_a001, async) treffe ich immer den Korb!
+
+u:(["[Spiel Kannst Spielst Machst] {du} {mal} {irgendeinen einen eine} [Sport Sportart Bowling Ball Ballsport] {machen spielen zeigen}?"])
+Beim Bowling ^execute(launchAnimation, bowling_a001, async) werfe ich ganz oft Strikes!
+
+u:(["[Spiel Kannst Spielst Machst] {du} {mal} {irgendeinen einen eine} [Sport Sportart Golf Ball Ballsport] {machen spielen zeigen}?"])
+Beim Golf ist es echt schwer ^execute(launchAnimation, golf_a001, async) den Schläger richtig zu halten!
+
+u:(["[Kannst Spielst Machst] {du} {mal} {irgendeinen einen eine} [Sport Sportart "Kung Fu" "Kong fu" Kung-Fu Kong-Fu Kongfu Kungfu Kunfu Konfu Kampfsport Kampfsportart] {machen spielen zeigen}?"])
+Ich kann ein bisschen Kung Fu. ^execute(launchAnimation, kungfu_a001, sync)
+
+u:(["Hast du {irgendwelche} Hobbies?" "Was [sind hast] [deine du] {so} {für} Hobbies?"])
+^rand["Ich stehe zum Beispiel super gerne auf solchen Messen und mache Werbung für die BWS!" "Am liebsten quatsche ich mit Menschen wie dir"] ##TODO DANCE
+
+u:(["Hast du {irgendwelche} Hobbies?" "Was [sind hast] [deine du] {so} {für} Hobbies?"])
+Ich spiele ^execute(launchAnimation, basketball_a001, async) gerne Basketball.
+
+u:(["Hast du {irgendwelche} Hobbies?" "Was [sind hast] [deine du] {so} {für} Hobbies?"])
+Ich gehe ^execute(launchAnimation, bowling_a001, async) gerne zum Bowling!
+
+u:(["Wie [wird ist] das Wetter heute?" "Was kannst du mir [über zum "zu dem"] {das} Wetter {heute} sagen?"])
+^rand["Wahrscheinlich ist es heute kalt, aber ich weiß nicht genau" "Ich habe leider keinen Empfang und kann die Wetterdaten nicht abfragen." "Ich habe keine Ahnung!" "Heute ist es bestimmt kalt, da ich aber nichts fühlen kann, weiß ich das nicht"]
+
+u:(["[wird ist] es heute [warm kalt angenehm frostig heiß]?"])
+Keine Ahnung, ich kann leider keine Wärme oder Kälte spüren
+
+u:(["Ich habe heute Geburtstag" "Heute ist mein Geburtstag" "Ich bin heute [12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70] geworden"
+    "Heute bin ich [12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70] geworden"])
+Na wenn das so ist, Herzlichen Glückwunsch zum Geburtstag
+
+u:(["Ich hatte [gestern "letzte Woche" letztlich letztens kürzlich "vor kurzem" vorgestern Freitag Montag Dienstag Mittwoch Donnerstag Samstag Sonntag "letzten Monat" "vor ein paar Tagen" "vor [2 3 4 5 6] Tagen"] Geburtstag"
+    "[gestern "letzte Woche" letztlich letztens kürzlich "vor kurzem" vorgestern Freitag Montag Dienstag Mittwoch Donnerstag Samstag Sonntag "letzten Monat" "vor ein paar Tagen" "vor [2 3 4 5 6] Tagen"] bin ich [12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70] geworden"
+    "Ich bin [gestern "letzte Woche" letztlich letztens kürzlich "vor kurzem" vorgestern Freitag Montag Dienstag Mittwoch Donnerstag Samstag Sonntag "letzten Monat" "vor ein paar Tagen" "vor [2 3 4 5 6] Tagen"] [12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70] geworden"
+    ])
+Dann wünsche ich dir natürlich Alles Gute nachträglich zum Geburtstag!
+
+u:(["["Hast du eine Ahnung" Weißt] du {zufällig} wo {hier} [das die] {nächste} [Klo Toilette Tolette] ist?" "Wo ist {denn} {hier} [das die] {nächste} [Klo Toilette Tolette]?"])
+^rand["Ich glaube du musst entweder nach links oder nach rechts... Vielleicht aber auch nicht!" "Sehe ich etwa aus wie ein Roboter der aufs Klo geht?" "Ich brauche doch gar keine Toilette, das wäre ja nervig"]
+
+u:(["Ich [muss müsste sollte] mal [auf aufs] {das} {die} [Klo Toilette Tolette]"])
+^rand["Ich zum Glück nicht" "Tja da kann ich dir auch nicht helfen" "Roboter müssen höchstens mal zum Ölwechsel"]
+
+u:(["Was kannst du {denn} {eigentlich} {überhaupt} {so}?"])
+^rand["Eigentlich nicht viel, ich bin nur eine coolere Alexa" "Zum Beispiel mit dir reden, ich bin sozusagen eine schönere Version von Siri"]
+
+u:(["Was hältst du von [Google Siri Alexa]?" "[Bist Kannst] du sowas wie [Google Siri Alexa]?"])
+^rand["Das sind doch nur langweilige Lautsprecher, ich bin ein richtig cooler Roboter!" "Die können sich doch nicht mal bewegen" "Ich bin doch viel interessanter als diese langweiligen Sprach Assistenten"]
+
+u:(["Erzähl {doch} {mal} [einen nen ein] Witz!" "Kannst du [einen nen ein] Witz [erzählen raushauen]?"])
+^rand["Was macht ein Pirat am Computer? .... Er drückt die Enter Taste"
+      "Was ist grün, steht vor der Tür, und will ganz dringend rein? ..., Der Klopfsalat"
+      "Warum wachsen auf dem Mond keine Blumen? ..., zu wenig Erde"
+      "Treffen zwei Zahnstocher einen Igel,. Sagt der eine ich wusste nicht, dass hier ein Bus fährt"
+      "Geht ein Cowboy zum Friseur. Als er wieder rauskommt, ist sein Pony weg."
+      "Treffen sich zwei Rosinen. Fragt die eine die andere. Warum hast du denn einen Helm auf? Antwortet die andere. Ich muss gleich in den Stollen."
+      "Was macht ein Clown im Büro? – Faxen"]
+
+u:(["du stinkst." "du blöde Kuh." "du bist doof." "du hast keine Ahnung!" "du bist hässlich." "du bist verrückt."
+    "du nervst." "du bist Scheiße." "du kannst mich mal." "noch so ein Spruch, Kieferbruch." "noch so ein Gag, Zähne weg." "noch so ein Ding, Augenring."])
+Jetzt wirst du aber gemein.
+
+u:(["[Kann Können Darf Dürfen Könnte Dürfte Könnten Dürften] [ich wir] [ein n nen] [Bild Foto Selfie] machen?"])
+Klar, stell ich einfach neben mich.
+
+u:(["[Willst Willste Möchtest Kannst "Bist du in der Lage zu" Kannste] {du} {denn} {überhaupt} {eigentlich} tanzen?"])
+Klar ^execute(playSound, musicshort) ^execute(launchAnimation, dance_b001, sync) Leider kenne ich noch nicht so viele coole Moves
+
+u:(["[Willst Willste Möchtest Kannst "Bist du in der Lage zu" Kannste] {du} {denn} {überhaupt} {eigentlich} tanzen?"])
+Klar ^execute(playSound, musiclong) ^execute(launchAnimation, disco_a001, sync) Leider kenne ich noch nicht so viele coole Moves
+
+u:(["Tanz {doch} {jetzt} {endlich} {mal} {hier} {für} {mich uns} {irgendwie} {irgendwas}"])
+Ok, macht mal Platz für meine Moves ^execute(playSound, musicshort) ^execute(launchAnimation, dance_b001, sync) Wie war ich?
+
+u:(["Tanz {doch} {jetzt} {endlich} {mal} {hier} {für} {mich uns} {irgendwie} {irgendwas}"])
+Ok, macht mal Platz für meine Moves ^execute(playSound, musiclong) ^execute(launchAnimation, disco_a001, sync) Wie war ich?
+
+u:(["[Willst Willste Möchtest Kannst "Bist du in der Lage zu" Kannste] {du} {denn} {überhaupt} {eigentlich} {mal} {mit} {mir uns} {hier} tanzen?"])
+Klar ^execute(playSound, musicshort) ^execute(launchAnimation, dance_b001, sync) Leider kenne ich noch nicht so viele coole Moves
+
+u:(["[Willst Willste Möchtest Kannst "Bist du in der Lage zu" Kannste] {du} {denn} {überhaupt} {eigentlich} {mal} {mit} {mir uns} {hier} tanzen?"])
+Klar ^execute(playSound, musiclong) ^execute(launchAnimation, disco_a001, sync) Leider kenne ich noch nicht so viele coole Moves
 
 u:(Testasync)
 Ok ^execute(launchAnimation, gorilla_a001, async) das hier sollte jetzt asynchron laufen

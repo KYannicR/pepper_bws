@@ -9,20 +9,50 @@ topic: ~solitary()
 
 #proposal: %test ^gotoRandom(moan_anim) ^rand["Langsam werd ich ja schon müde hier." "Oh man langsam wirds langweilig hier."]
 
-u:(^empty) %bored_anim
-^execute(launchAnimation, scratch_top_of_head_right_b001, sync) ^rand["Man ist das langweilig hier." "Hier ist ja gar nichts los."]
+u:(^empty) %bored_anim1_soli
+^execute(launchAnimation, scratch_top_of_head_right_b001, sync) ^rand["Hier ist ja wenig los."]
 
-u:(^empty) %bored_anim
-^execute(launchAnimation, check_time_right_b001, sync) ^rand["Man ist das langweilig hier." "Hier ist ja gar nichts los."]
+u:(^empty) %bored_anim2_soli
+^execute(launchAnimation, check_time_right_b001, sync) ^rand["Man ist das langweilig hier."]
 
-u:(^empty) %moan_anim
-^execute(launchAnimation, bored_a001, sync) ^rand["Langsam werd ich ja schon müde hier." "Oh man langsam wirds langweilig hier."]
+u:(^empty) %moan_anim_soli
+^execute(launchAnimation, bored_a001, sync) ^rand["Langsam werd ich ja schon müde."]
 
-u:(^empty) %moan_anim
-^execute(launchAnimation, sad_a001, sync) ^rand["Langsam werd ich ja schon müde hier." "Oh man langsam wirds langweilig hier."]
+u:(^empty) %sleep_anim_soli
+^execute(launchAnimation, napping_right, sync) ^rand["Ups.. da wäre ich doch fast eingenickt."]
 
-u:(^empty) %sleep_anim
-^execute(launchAnimation, napping_right, sync) ^rand["Ups.. da wäre ich doch fast eingenickt." "Oh man.. jetzt wäre ich fast schon eingeschlafen."]
+u:(^empty) %keiner_soli
+^execute(launchAnimation, sad_a001, sync) ^rand["Wieso spricht denn keiner mit mir?"]
 
-u:(^empty) %sleep_anim
-^execute(launchAnimation, napping_left, sync) ^rand["Ups.. da wäre ich doch fast eingenickt." "Oh man.. jetzt wäre ich fast schon eingeschlafen."]
+u:(^empty) %kommt_soli
+^execute(launchAnimation, raise_right_hand_b001, async) ^rand["Ihr könnt gerne näher kommen und euch mit mir unterhalten!"]
+
+u:(^empty) %listen_soli
+^execute(launchAnimation, listen_left_b001, async) Hat gerade jemand etwas gesagt? Oder bilde ich mir das nur ein?
+
+u:(^empty) %basketball_soli
+^execute(launchAnimation, basketball_a001, async) Wenn keiner mit mir spricht, spiele ich halt ein bisschen Basketball!
+
+u:(^empty) %itch_soli
+^execute(launchAnimation, itchi_a001, sync) ..
+
+u:(^empty) %chill_soli
+^execute(launchAnimation, chill_a001, sync) ...
+
+u:(^empty) %where_soli
+^execute(launchAnimation, looking_up_left_hand_b001, sync) Wo sind denn alle hin?
+
+u:(^empty) %kopf_soli
+Kann mich mal jemand am Kopf streicheln?
+
+u:(^empty) %keinerTanzen_soli
+^execute(launchAnimation, sad_a001, sync) ^rand["Will jemand mal mit mir tanzen? Fragt ruhig einfach"]
+
+u:(^empty) %reden_soli
+^execute(launchAnimation, chill_a001, async) Ihr könnt ruhig einfach mit mir reden.
+
+u:(^empty) %fragen_soli
+Wollt mich wirklich niemand etwas fragen? Vielleicht nach einem Foto oder einem Tanz?
+
+u:(^empty) %dreaming_soli
+Falls ich mal wieder vor mich hinträume, ruft einfach mal Pepper oder streichelt meinen Kopf
