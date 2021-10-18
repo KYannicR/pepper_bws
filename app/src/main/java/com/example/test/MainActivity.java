@@ -42,6 +42,7 @@ import com.aldebaran.qi.sdk.object.touch.TouchSensor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -132,6 +133,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         stopTimers();
         solitaryTimer.cancel();
         attractionTimer.cancel();
+        purgeTimers();
 
         if (chat != null) {
             chat.removeAllOnStartedListeners();
@@ -334,10 +336,17 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         mediaPlayer.start();
     }
 
+    private void purgeTimers(){
+        attractionTimer.purge();
+        solitaryTimer.purge();
+        proactiveTimer.purge();
+    }
     public void stopTimers() {
         //solitaryTimer.cancel();
         Log.i("END", "TIMER END");
         proactiveTimer.cancel();
+        purgeTimers();
+        //attractionTimer.cancel();
         //timersActive = false;
     }
 
@@ -347,15 +356,25 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         proactiveTimer.schedule(new TimerTask() {
             public void run() {
                 if(!saidSomething){
+                    saidSomething = true;
                     tryProactive();
                 }
             }
         }, 18000, 20000);
 
+
         //timersActive = true;
     }
 
     private void startSolitary() {
+        solitaryTimer = new Timer();
+        solitaryTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                trySolitary();
+            }
+        }, 30000, 70000);
+
         attractionTimer = new Timer();
         attractionTimer.schedule(new TimerTask() {
             @Override
@@ -363,16 +382,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
                 tryAttraction();
                 saidSomething = false;
             }
-        }, 20000, 20000);
-
-        solitaryTimer = new Timer();
-        solitaryTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                trySolitary();
-                
-            }
-        }, 30000, 70000);
+        }, 25000, 20000);
     }
 
     private void tryProactive(){
@@ -380,14 +390,15 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             humans = findHumansAround();
             proactiveZone = testProactive(ranges);
             ranges.clear();
-            Log.i("PRO", "Testing Proactive, " + humans);
+            Log.i("PRO", "Testing Proactive, " + humans + "  At: " + Calendar.getInstance().getTime());
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
         if (humans != 0 && proactiveZone) {
             animLock.lock();
             try {
-                Log.i("PRO", "Speaking Proactive");
+                saidSomething = true;
+                Log.i("PRO", "Speaking Proactive  " + Calendar.getInstance().getTime());
                 speak("proactive");
             } finally {
                 animLock.unlock();
@@ -477,11 +488,13 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         humanAwareness.addOnHumansAroundChangedListener(changedHumans -> {
             if(changedHumans.size() != 0 && !saidSomething){
                 stopTimers();
+                purgeTimers();
+                saidSomething = true;
                 animLock.lock();
                 try {
                     Log.i("SOL", "Speaking Proactive after detect");
                     speak("proactive");
-                    saidSomething = true;
+
                 } finally {
                     animLock.unlock();
                 }
@@ -495,6 +508,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         humanAwareness.addOnEngagedHumanChangedListener(engagedHuman -> {
             Log.i("Humans", "Engaged Human changed");
             stopTimers();
+            purgeTimers();
             startTimers();
         });
     }
@@ -503,9 +517,15 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         chat.addOnListeningChangedListener(listening -> {
             //show Buttons while listening
             if(listening.equals(true)) {
+                saidSomething = true;
+                purgeTimers();
+                startTimers();
                 showUI();
             } else {
                 hideUI();
+                stopTimers();
+                purgeTimers();
+                saidSomething = true;
             }
         });
     }

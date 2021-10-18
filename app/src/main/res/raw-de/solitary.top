@@ -43,7 +43,7 @@ u:(^empty) %kopf_soli
 Kann mich mal jemand am Kopf streicheln?
 
 u:(^empty) %keinerTanzen_soli
-^execute(launchAnimation, sad_a001, sync) ^rand["Will jemand mal mit mir tanzen? Fragt ruhig einfach"]
+Will jemand mal mit mir tanzen? Fragt ruhig einfach
 
 u:(^empty) %reden_soli
 ^execute(launchAnimation, chill_a001, async) Ihr könnt ruhig einfach mit mir reden.

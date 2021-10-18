@@ -1,7 +1,5 @@
 package com.example.test;
 
-import android.util.Log;
-
 import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.builder.AnimateBuilder;
@@ -11,7 +9,6 @@ import com.aldebaran.qi.sdk.object.actuation.Animation;
 import com.aldebaran.qi.sdk.object.conversation.BaseQiChatExecutor;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 class MyQiChatExecutor extends BaseQiChatExecutor {
     private final QiContext qiContext;

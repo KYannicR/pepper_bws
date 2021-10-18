@@ -38,7 +38,7 @@ u:(^empty) %where_att
 ^execute(launchAnimation, looking_up_left_hand_b001, sync) Wo sind denn alle hin?
 
 u:(^empty) %keinerTanzen_att
-^execute(launchAnimation, sad_a001, sync) ^rand["Will jemand mal mit mir tanzen? Fragt ruhig einfach"]
+Will jemand mal mit mir tanzen? Fragt ruhig einfach
 
 u:(^empty) %reden_att
 ^execute(launchAnimation, chill_a001, async) Ihr könnt ruhig einfach mit mir reden.
