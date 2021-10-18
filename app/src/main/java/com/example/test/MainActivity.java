@@ -70,6 +70,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     //private boolean timersActive = false;
     private Map<String, Bookmark> proactiveBookmarks, attractionBookmarks, solitaryBookmarks;
     private Topic proTop, attTop, solTop;
+    private boolean saidSomething;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +130,9 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     @Override
     public void onRobotFocusLost() {
         stopTimers();
+        solitaryTimer.cancel();
+        attractionTimer.cancel();
+
         if (chat != null) {
             chat.removeAllOnStartedListeners();
         }
@@ -264,7 +268,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     private int findHumansAround() throws ExecutionException {
         Future<List<Human>> humansAroundFuture = humanAwareness.async().getHumansAround();
         humansAroundFuture.andThenConsume(humansAround -> {
-            Log.i("TAG", humansAround.size() + " human(s) around.");
+            //Log.i("Count", humansAround.size() + " human(s) around.");
             retrieveCharacteristics(humansAround);
         });
         List<Human> humanCount = humansAroundFuture.get();
@@ -295,14 +299,14 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
 
     private boolean testProactive(List<Double> ranges){
         for (Double curr : ranges) {
-            if (curr <= 1.8) return true;
+            if (curr <= 1.5) return true;
         }
         return false;
     }
 
     private boolean testAttraction(List<Double> ranges){
         for (Double curr : ranges) {
-            if (curr > 1.8) return true; //curr < 2.5 &&
+            if (curr > 1.5) return true; //curr < 2.5 &&
         }
         return false;
     }
@@ -331,81 +335,44 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     }
 
     public void stopTimers() {
-        solitaryTimer.cancel();
-        attractionTimer.cancel();
+        //solitaryTimer.cancel();
+        Log.i("END", "TIMER END");
         proactiveTimer.cancel();
         //timersActive = false;
     }
 
     public void startTimers() {
+        Log.i("START", "TIMER START");
         proactiveTimer = new Timer();
         proactiveTimer.schedule(new TimerTask() {
             public void run() {
-                tryProactive();
+                if(!saidSomething){
+                    tryProactive();
+                }
             }
-        }, 19000, 19000);
+        }, 18000, 20000);
 
+        //timersActive = true;
+    }
+
+    private void startSolitary() {
         attractionTimer = new Timer();
         attractionTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 tryAttraction();
+                saidSomething = false;
             }
-        }, 21000, 21000);
+        }, 20000, 20000);
 
-        /*solitaryTimer = new Timer();
-        solitaryTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    humans = findHumansAround();
-                    attractionZone = testAttraction(ranges);
-                    proactiveZone = testProactive(ranges);
-                    solitaryZone = testSolitary(ranges);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-                if ((solitaryZone || humans == 0) && !attractionZone && !proactiveZone) {
-                    animLock.lock();
-                    try {
-                        runOnUiThread(() -> {
-                            setImage();
-                            //TODO ent_button.setVisibility(View.GONE);
-                            kar_button.setVisibility(View.GONE);
-                            jobs_button.setVisibility(View.GONE);
-                        });
-                            speak("solitary");
-                        runOnUiThread(() -> {
-                            clearImage();
-                            //ent_button.setVisibility(View.VISIBLE);
-                            kar_button.setVisibility(View.VISIBLE);
-                            jobs_button.setVisibility(View.VISIBLE);
-                        });
-                    } finally {
-                        animLock.unlock();
-                    }
-                }
-                ranges.clear();
-            }
-        }, 125000, 125000);*/
-        //timersActive = true;
-    }
-
-    private void startSolitary() {
         solitaryTimer = new Timer();
         solitaryTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                animLock.lock();
-                try {
-                    hideUI();
-                    speak("solitary");
-                } finally {
-                    animLock.unlock();
-                    showUI();
-                }
+                trySolitary();
+                
             }
-        }, 15000, 60000);
+        }, 30000, 70000);
     }
 
     private void tryProactive(){
@@ -413,12 +380,14 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             humans = findHumansAround();
             proactiveZone = testProactive(ranges);
             ranges.clear();
+            Log.i("PRO", "Testing Proactive, " + humans);
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
         if (humans != 0 && proactiveZone) {
             animLock.lock();
             try {
+                Log.i("PRO", "Speaking Proactive");
                 speak("proactive");
             } finally {
                 animLock.unlock();
@@ -432,13 +401,38 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             attractionZone = testAttraction(ranges);
             proactiveZone = testProactive(ranges);
             ranges.clear();
+            Log.i("ATT", "Testing Attraction, " + humans);
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
         if (humans != 0 && attractionZone && !proactiveZone) {
             animLock.lock();
             try {
+                Log.i("ATT", "Speaking Attraction");
                 speak("attraction");
+            } finally {
+                animLock.unlock();
+            }
+        }
+    }
+
+    private void trySolitary(){
+        try {
+            humans = findHumansAround();
+            attractionZone = testAttraction(ranges);
+            proactiveZone = testProactive(ranges);
+            solitaryZone = testSolitary(ranges);
+            ranges.clear();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        if ((solitaryZone || humans == 0) && !attractionZone && !proactiveZone) {
+            animLock.lock();
+            try {
+                hideUI();
+                Log.i("SOL", "Speaking Solitary");
+                speak("solitary");
+                showUI();
             } finally {
                 animLock.unlock();
             }
@@ -481,40 +475,27 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         });
 
         humanAwareness.addOnHumansAroundChangedListener(changedHumans -> {
-            if(changedHumans.size() != 0){
+            if(changedHumans.size() != 0 && !saidSomething){
                 stopTimers();
                 animLock.lock();
                 try {
-                    hideUI();
+                    Log.i("SOL", "Speaking Proactive after detect");
                     speak("proactive");
+                    saidSomething = true;
                 } finally {
                     animLock.unlock();
-                    showUI();
                 }
                 startTimers();
             } else {
-                startSolitary();
-                Log.i("Humans", "Found no humans after change.");
+                Log.i("Humans", "Found no humans after change or said something.");
             }
+
         });
 
         humanAwareness.addOnEngagedHumanChangedListener(engagedHuman -> {
-            if(engagedHuman != null){
-                stopTimers();
-                animLock.lock();
-                try {
-                    hideUI();
-                    speak("proactive");
-                } finally {
-                    animLock.unlock();
-                    showUI();
-                }
-                startTimers();
-            }
-            if(engagedHuman == null){
-                startSolitary();
-                Log.i("Engaged", "Engaged human(s) = null.");
-            }
+            Log.i("Humans", "Engaged Human changed");
+            stopTimers();
+            startTimers();
         });
     }
 

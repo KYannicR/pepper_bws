@@ -94,8 +94,8 @@ u:(^empty) %BWS_pro
             "Schade, ich bin doch extra hier, um dir etwas über BWS zu erzählen"
             "Toll, dann geh doch weiter!"]
 
-u:(^empty) %arbeiten_pro
-^execute(lauchAnimation, hello_a010, async)
+u:(^empty) %arbeiten
+^execute(launchAnimation, hello_a010, async)
 ^rand[
     "Hast du lust mit Technik zu arbeiten?"
     "Hey, hast du lust in einem modärnen Unternehmen zu arbeiten?"
@@ -146,7 +146,7 @@ u:(^empty) %gefällts_dir_hier_pro
         u2:([doch schon ja joa])
             Neis, immerhin. Schau dich gerne um.
 
-u:(^empty) %greetings_pro
+u:(^empty) %greetings
 ["$Dialog/Hour==7 Schönen guten Morgen!"
  "$Dialog/Hour<7 Schönen guten Morgen!"
  "$Dialog/Hour>7 $Dialog/Hour<11 Schönen guten Morgen!"
@@ -183,4 +183,4 @@ u:(^empty) %rand_compliment_pro
                 "Kein Problem. Ich verteile gerne Komplimente"]
 
 u:(^empty) %kopf_pro
-Kann mich mal jemand am Kopf streicheln?
+Falls dir keine Fragen einfallen, kannst du mir gerne über den Kopf streicheln!

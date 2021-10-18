@@ -22,14 +22,8 @@ u:(^empty) %rand_compliment_att
         ^rand[  "Immer wieder gerne."
                 "Kein Problem. Ich verteile gerne Komplimente"]
 
-u:(^empty) %itch_att
-^execute(launchAnimation, itchi_a001, sync)
-
-u:(^empty) %chill_att
-^execute(launchAnimation, chill_a001, sync)
-
 u:(^empty) %kopf_att
-Kann mich mal jemand am Kopf streicheln?
+Ihr könnt mich gerne mal am Kopf streicheln
 
 u:(^empty) %hören_att
 ^execute(launchAnimation, listen_left_b001, async) Hat gerade jemand etwas gesagt? Oder bilde ich mir das nur ein?
@@ -50,7 +44,7 @@ u:(^empty) %reden_att
 ^execute(launchAnimation, chill_a001, async) Ihr könnt ruhig einfach mit mir reden.
 
 u:(^empty) %fragen_att
-Wollt mich wirklich niemand etwas fragen? Vielleicht nach einem Foto oder einem Tanz?
+Will mich wirklich niemand etwas fragen? Vielleicht nach einem Foto oder einem Tanz?
 
 u:(^empty) %dreaming_att
 Falls ich mal wieder vor mich hinträume, ruft einfach mal Pepper oder streichelt meinen Kopf

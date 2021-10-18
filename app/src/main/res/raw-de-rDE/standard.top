@@ -96,9 +96,9 @@ u:(["{Pepper} [Sag Erzähl Hau Mach] {mal ma} was {raus}"
     "{Pepper} Kannst du was [sagen sprechen reden erzählen]?"])
 Was.... Haha, ich bin so lustig
 
-u:("{~hi} Google") Sehe ich etwa aus wie Google?
+u:("{~hi} {Ok Okay Oke Okey} Google") Sehe ich etwa aus wie Google?
 
-u:("{~hi} Siri") Sehe ich etwa aus wie Google?
+u:("{~hi} Siri") Sehe ich etwa aus wie Siri?
 
 u:("{~hi} ["Alexa" "Echo" "Roboter" "Computer"]") Sehe ich etwa aus wie eine Alexa? Frag einfach drauf los, sobald ich blau leuchte.
 
@@ -120,9 +120,10 @@ Ok ^execute(launchAnimation, dog_a001, sync) wie war das?
 u:([~animals "[Zeig Mach Spiel] {mir} {mal} {eine ne} [Maus Tier] {nach}" "Kannst du {mir} {mal} {eine ne} [Maus Tier] [zeigen machen spielen nachahmen]"])
 Ok ^execute(launchAnimation, mouse_a001, sync) wie war das?
 
-u:(["[Warum Wieso Weshalb] ist {hier} [hier "bei euch" "am Stand" "an eurem Stand"] {"bei euch" "am Stand"} {denn} {eigentlich} {überhaupt} {fast} {gar} nichts los"
-    "[Warum Wieso Weshalb] ist {hier} [hier "bei euch" "am Stand" "an eurem Stand"] {"bei euch" "am Stand"} {denn} {eigentlich} {überhaupt} {fast} {gar} nicht {so} viel los?"
-    "[Warum Wieso Weshalb] ist [hier "am Stand" "an eurem Stand" "bei euch"] {denn} {eigentlich} {überhaupt} {fast} {gar} [keiner niemand]"])
+u:(["[Warum Wieso Weshalb] ist {hier} {hier "bei euch" "am Stand" "an eurem Stand"} {"bei euch" "am Stand"} {denn} {eigentlich} {überhaupt} {fast} {gar} nichts los?"
+"[Warum Wieso Weshalb] ist {hier} {hier "bei euch" "am Stand" "an eurem Stand"} {"bei euch" "am Stand"} {denn} {eigentlich} {überhaupt} {fast} {gar so} wenig los?"
+    "[Warum Wieso Weshalb] ist {hier} {hier "bei euch" "am Stand" "an eurem Stand"} {"bei euch" "am Stand"} {denn} {eigentlich} {überhaupt} {fast} {gar} nicht {so} viel los?"
+    "[Warum Wieso Weshalb] ist {hier "am Stand" "an eurem Stand" "bei euch"} {denn} {eigentlich} {überhaupt} {fast} {gar} [keiner niemand]"?])
 Weiß ^execute(lauchAnimation, sad_a001, async) ich auch nicht, vielleicht bin ich so uninteressant!
 
 u:(["Was macht [ihr man] {denn} {überhaupt} {so} bei {der eurer diesem dieser eurem euerm} [BWS Firma Unternehmen]"
@@ -134,22 +135,22 @@ u:(["Was ist {denn} {bei} [euch hier] {am} {Stand} {so} los?" "Was [geht läuft]
 Na wir bewerben hier am Stand die coolste Firma der Welt, sieht man doch!
 
 u:([~instrument "[Spiel Kannst Spielst Machst] {du} {mal} {auch} {sowas} {wie} {ein eine die} [Instrument Gitarre Guitarre Guitar] {spielen machen}"])
-Klar, schau mal ^execute(launchAnimation, guitar_a001, sync). Leider ist es nur eine Luftgitarre.
+Klar, schau mal ^execute(launchAnimation, guitar_a001, sync) Leider ist es nur eine Luftgitarre.
 
 u:([~instrument "[Spiel Kannst Spielst Machst] {du} {mal} {auch} {sowas} {wie} {ein eine die das} [Instrument Saxophon Saxofon Saxophone] {spielen machen}"])
-Klar, hier ^execute(launchAnimation, saxophone_a001, sync). Aber irgendwie kommt kein Ton aus meinem Saxofon.
+Klar, hier ^execute(launchAnimation, saxophone_a001, sync) Aber irgendwie kommt kein Ton aus meinem Saxofon.
 
 u:([~instrument "[Spiel Kannst Spielst Machst] {du} {mal} {auch} {sowas} {wie} {ein eine die das} [Instrument Trommel Trommelwirbel Schlagzeug Bongo] {spielen machen}"])
-Klar, hier ^execute(launchAnimation, drumroll_b001, sync). Aber ohne eine echte Trommel ist das ganz schön langweilig.
+Klar, hier ^execute(launchAnimation, drumroll_b001, sync) Aber ohne eine echte Trommel ist das ganz schön langweilig.
 
 u:(["[Spiel Kannst Spielst Machst] {du} {mal} {irgendeinen einen eine} [Sport Sportart Basketball Ball Ballsport] {machen spielen zeigen}?"])
-Beim Basketball ^execute(launchAnimation, basketball_a001, async) treffe ich immer den Korb!
+^execute(launchAnimation, basketball_a001, async) Ich kann Basketball spielen! Schau hier!
 
 u:(["[Spiel Kannst Spielst Machst] {du} {mal} {irgendeinen einen eine} [Sport Sportart Bowling Ball Ballsport] {machen spielen zeigen}?"])
-Beim Bowling ^execute(launchAnimation, bowling_a001, async) werfe ich ganz oft Strikes!
+^execute(launchAnimation, bowling_a001, async) Ich gehe gerne zum Bowling und ich werfe ganz oft Strikes!
 
 u:(["[Spiel Kannst Spielst Machst] {du} {mal} {irgendeinen einen eine} [Sport Sportart Golf Ball Ballsport] {machen spielen zeigen}?"])
-Beim Golf ist es echt schwer ^execute(launchAnimation, golf_a001, async) den Schläger richtig zu halten!
+ ^execute(launchAnimation, golf_a001, async) Golf kann ich zum Beispiel, aber es ist echt schwer den Schläger richtig zu halten!
 
 u:(["[Kannst Spielst Machst] {du} {mal} {irgendeinen einen eine} [Sport Sportart "Kung Fu" "Kong fu" Kung-Fu Kong-Fu Kongfu Kungfu Kunfu Konfu Kampfsport Kampfsportart] {machen spielen zeigen}?"])
 Ich kann ein bisschen Kung Fu. ^execute(launchAnimation, kungfu_a001, sync)
@@ -166,10 +167,13 @@ Ich gehe ^execute(launchAnimation, bowling_a001, async) gerne zum Bowling!
 u:(["Wie [wird ist] das Wetter heute?" "Was kannst du mir [über zum "zu dem"] {das} Wetter {heute} sagen?"])
 ^rand["Wahrscheinlich ist es heute kalt, aber ich weiß nicht genau" "Ich habe leider keinen Empfang und kann die Wetterdaten nicht abfragen." "Ich habe keine Ahnung!" "Heute ist es bestimmt kalt, da ich aber nichts fühlen kann, weiß ich das nicht"]
 
+u:(["Wie [wird ist] das Wetter morgen?" "Was kannst du mir [über zum "zu dem"] {das} Wetter morgen sagen?"])
+^rand["Morgen wir es bestimmt kalt. Aber vielleicht auch warm." "Ich habe leider keinen Empfang und kann die Wetterdaten nicht abfragen." "Ich habe keine Ahnung!"]
+
 u:(["[wird ist] es heute [warm kalt angenehm frostig heiß]?"])
 Keine Ahnung, ich kann leider keine Wärme oder Kälte spüren
 
-u:(["Ich habe heute Geburtstag" "Heute ist mein Geburtstag" "Ich bin heute [12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70] geworden"
+u:(["Ich habe {heute} Geburtstag" "Heute ist mein Geburtstag" "Ich bin heute [12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70] geworden"
     "Heute bin ich [12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70] geworden"])
 Na wenn das so ist, Herzlichen Glückwunsch zum Geburtstag
 
@@ -185,18 +189,21 @@ u:(["["Hast du eine Ahnung" Weißt] du {zufällig} wo {hier} [das die] {nächste
 u:(["Ich [muss müsste sollte] mal [auf aufs] {das} {die} [Klo Toilette Tolette]"])
 ^rand["Ich zum Glück nicht" "Tja da kann ich dir auch nicht helfen" "Roboter müssen höchstens mal zum Ölwechsel"]
 
-u:(["Was kannst du {denn} {eigentlich} {überhaupt} {so}?"])
+u:(["Was [kannst kannste] du {denn} {eigentlich} {überhaupt} {so} {machen tun}?"])
 ^rand["Eigentlich nicht viel, ich bin nur eine coolere Alexa" "Zum Beispiel mit dir reden, ich bin sozusagen eine schönere Version von Siri"]
+
+u:(["Was [kannst kannste] du {denn} {eigentlich} {überhaupt} {so} {machen tun}?"])
+^rand["Ich kann zum Beispiel extrem gut tanzen." "Ich bin eine sehr gute Basketballspielerin" "Wir haben eine Liste mit den coolsten Sachen die ich machen kann! Schau einfach mal nach."]
 
 u:(["Was hältst du von [Google Siri Alexa]?" "[Bist Kannst] du sowas wie [Google Siri Alexa]?"])
 ^rand["Das sind doch nur langweilige Lautsprecher, ich bin ein richtig cooler Roboter!" "Die können sich doch nicht mal bewegen" "Ich bin doch viel interessanter als diese langweiligen Sprach Assistenten"]
 
 u:(["Erzähl {doch} {mal} [einen nen ein] Witz!" "Kannst du [einen nen ein] Witz [erzählen raushauen]?"])
-^rand["Was macht ein Pirat am Computer? .... Er drückt die Enter Taste"
-      "Was ist grün, steht vor der Tür, und will ganz dringend rein? ..., Der Klopfsalat"
-      "Warum wachsen auf dem Mond keine Blumen? ..., zu wenig Erde"
+^rand["Was macht ein Pirat am Computer? ..... Er drückt die Enter Taste"
+      "Was ist grün, steht vor der Tür, und will ganz dringend rein? ..... Der Klopfsalat"
+      "Warum wachsen auf dem Mond keine Blumen? ..... zu wenig Erde"
       "Treffen zwei Zahnstocher einen Igel,. Sagt der eine ich wusste nicht, dass hier ein Bus fährt"
-      "Geht ein Cowboy zum Friseur. Als er wieder rauskommt, ist sein Pony weg."
+      "Geht ein Kauboy zum Friseur. Als er wieder rauskommt, ist sein Pony weg."
       "Treffen sich zwei Rosinen. Fragt die eine die andere. Warum hast du denn einen Helm auf? Antwortet die andere. Ich muss gleich in den Stollen."
       "Was macht ein Clown im Büro? – Faxen"]
 
@@ -204,26 +211,54 @@ u:(["du stinkst." "du blöde Kuh." "du bist doof." "du hast keine Ahnung!" "du b
     "du nervst." "du bist Scheiße." "du kannst mich mal." "noch so ein Spruch, Kieferbruch." "noch so ein Gag, Zähne weg." "noch so ein Ding, Augenring."])
 Jetzt wirst du aber gemein.
 
-u:(["[Kann Können Darf Dürfen Könnte Dürfte Könnten Dürften] [ich wir] [ein n nen] [Bild Foto Selfie] machen?"])
-Klar, stell ich einfach neben mich.
+u:(["[Kann Können Darf Dürfen Könnte Dürfte Könnten Dürften] [ich wir] [ein n nen] [Bild Foto Selfie ßälfi SSälfi ßälfie SSälfie SSelfi SSelfie] machen?"])
+Klar, stell ich einfach neben mich. Wenn ich posen oder winken soll, sag einfach bescheid.
+    u1:(["{Ok Okay Okey Okej} [Mach Nimm] {mal} {eine} Pose {ein}" "[Pos Pose] {mal}" "{Kannst Willst Kannste} {denn} {dann} {mal} posen?"])
+    Ok, aber beeil dich, ich kann nicht lange stillhalten! ^execute(launchAnimation, spread_both_hands_b004, sync) hat es geklappt? Wenn nicht, sag einfach Nochmal
+        u2:("{~nein} Nochmal {bitte}")
+        Ok, dann nochmal ^execute(launchAnimation, spread_both_hands_b004, sync)
+    u1:(["{Ok Okay Okey Okej} [Wink Winken] {mal}" "{Kannst Willst Kannste} {denn} {dann} {mal} winken?"])
+    Ok, dann los, aber komm nicht zu nah an meine Arme! ^execute(launchAnimation, hello_a004, sync) hat es geklappt? Wenn nicht, sag einfach Nochmal
+        u2:("{~nein} Nochmal {bitte}")
+        Ok, dann nochmal ^execute(launchAnimation, hello_a004, sync)
+
+u:(["{Ok Okay Okey Okej} {dann} [Mach Nimm] {mal} {eine} Pose {ein}" "[Pos Pose] {mal}" "{Kannst Willst Kannste} {denn} {dann} {mal} posen?"])
+Ok, aber beeil dich, ich kann nicht lange stillhalten! ^execute(launchAnimation, spread_both_hands_b004, sync) hat es geklappt? Wenn nicht, sag einfach Nochmal
+    u1:("{~nein} Nochmal {bitte}")
+    Ok, dann nochmal ^execute(launchAnimation, spread_both_hands_b004, sync)
+
+u:(["{Ok Okay Okey Okej} {dann} [Wink Winken] {mal}" "{Kannst Willst Kannste} {denn} {dann} {mal} winken?"])
+Ok, aber komm nicht zu nah an meine Arme! ^execute(launchAnimation, hello_a004, sync) hat es geklappt? Wenn nicht, sag einfach Nochmal
+    u2:("{~nein} Nochmal {bitte}")
+    Ok, dann nochmal ^execute(launchAnimation, hello_a004, sync)
+
+u:(["{Ok Okay Okey Okej} {dann} [Wink Winken] {mal}" "{Kannst Willst Kannste} {denn} {dann} {mal} winken?"])
+Ok, aber komm nicht zu nah an meine Arme! ^execute(launchAnimation, hello_a009, sync) hat es geklappt? Wenn nicht, sag einfach Nochmal
+    u2:("{~nein} Nochmal {bitte}")
+    Ok, dann nochmal ^execute(launchAnimation, hello_a009, sync)
 
 u:(["[Willst Willste Möchtest Kannst "Bist du in der Lage zu" Kannste] {du} {denn} {überhaupt} {eigentlich} tanzen?"])
-Klar ^execute(playSound, musicshort) ^execute(launchAnimation, dance_b001, sync) Leider kenne ich noch nicht so viele coole Moves
+Klar ^execute(playSound, musicshort) ^execute(launchAnimation, dance_b001, sync) Leider kenne ich noch nicht so viele coole Muhfs
 
 u:(["[Willst Willste Möchtest Kannst "Bist du in der Lage zu" Kannste] {du} {denn} {überhaupt} {eigentlich} tanzen?"])
-Klar ^execute(playSound, musiclong) ^execute(launchAnimation, disco_a001, sync) Leider kenne ich noch nicht so viele coole Moves
+Klar ^execute(playSound, musiclong) ^execute(launchAnimation, disco_a001, sync) Leider kenne ich noch nicht so viele coole Muhfs
 
 u:(["Tanz {doch} {jetzt} {endlich} {mal} {hier} {für} {mich uns} {irgendwie} {irgendwas}"])
-Ok, macht mal Platz für meine Moves ^execute(playSound, musicshort) ^execute(launchAnimation, dance_b001, sync) Wie war ich?
+Ok, macht mal Platz für meine Muhfs ^execute(playSound, musicshort) ^execute(launchAnimation, dance_b001, sync) Wie war ich?
 
 u:(["Tanz {doch} {jetzt} {endlich} {mal} {hier} {für} {mich uns} {irgendwie} {irgendwas}"])
-Ok, macht mal Platz für meine Moves ^execute(playSound, musiclong) ^execute(launchAnimation, disco_a001, sync) Wie war ich?
+Ok, macht mal Platz für meine Muhfs ^execute(playSound, musiclong) ^execute(launchAnimation, disco_a001, sync) Wie war ich?
 
-u:(["[Willst Willste Möchtest Kannst "Bist du in der Lage zu" Kannste] {du} {denn} {überhaupt} {eigentlich} {mal} {mit} {mir uns} {hier} tanzen?"])
-Klar ^execute(playSound, musicshort) ^execute(launchAnimation, dance_b001, sync) Leider kenne ich noch nicht so viele coole Moves
+u:(["[Wollen Wolln Willst Willste Möchtest Kannst "Bist du in der Lage zu" Kannste] {du wir} {denn} {überhaupt} {eigentlich} {mal} {mit} {mir uns} {hier} tanzen?"])
+Klar ^execute(playSound, musicshort) ^execute(launchAnimation, dance_b001, sync) Leider kenne ich noch nicht so viele coole Muhfs
 
-u:(["[Willst Willste Möchtest Kannst "Bist du in der Lage zu" Kannste] {du} {denn} {überhaupt} {eigentlich} {mal} {mit} {mir uns} {hier} tanzen?"])
-Klar ^execute(playSound, musiclong) ^execute(launchAnimation, disco_a001, sync) Leider kenne ich noch nicht so viele coole Moves
+u:(["[Wollen Wolln Willst Willste Möchtest Kannst "Bist du in der Lage zu" Kannste] {du wir} {denn} {überhaupt} {eigentlich} {mal} {mit} {mir uns} {hier} tanzen?"])
+Klar ^execute(playSound, musiclong) ^execute(launchAnimation, disco_a001, sync) Leider kenne ich noch nicht so viele coole Muhfs
 
 u:(Testasync)
 Ok ^execute(launchAnimation, gorilla_a001, async) das hier sollte jetzt asynchron laufen
+
+u:(["Was [werden wird] {denn} {zurzeit} {für} {Berufe Jobs Personen Studenten Stellen} {bei beim "bei der" für in} {der die das} [BWS "eurem Unternehmen" "eurer Firma" "BWS {Konsalting} Group" "BWS {Konsalting} Grub"] [gesucht gebraucht benötigt]"
+    "Was {für} {Berufe Jobs Personen Studenten Stellen} [braucht benötigt sucht] {der die das} [BWS "euer Unternehmen" "eure Firma" "BWS {Konsalting} Group" "BWS {Konsalting} Grub"] {denn} {zurzeit jetzt gerade grade} {für} {Berufe Jobs Personen Studenten Stellen}?"
+    "[Welche Welcher] {Job Beruf Stelle Berufe Jobs Personen Studenten Stellen} {werden wird} {denn} {zurzeit jetzt gerade grad grade} {bei für in} {der die das} [BWS "eurem Unternehmen" "eurer Firma" "BWS {Konsalting} Group" "BWS {Konsalting} Grub"] [gesucht gebraucht benötigt]"])
+Schau einfach mal hinter dem Button... Wir suchen... welche Stellenangebote derzeit offen sind.

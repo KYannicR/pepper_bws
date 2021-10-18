@@ -33,11 +33,8 @@ u:(^empty) %listen_soli
 u:(^empty) %basketball_soli
 ^execute(launchAnimation, basketball_a001, async) Wenn keiner mit mir spricht, spiele ich halt ein bisschen Basketball!
 
-u:(^empty) %itch_soli
-^execute(launchAnimation, itchi_a001, sync) ..
-
 u:(^empty) %chill_soli
-^execute(launchAnimation, chill_a001, sync) ...
+^execute(launchAnimation, chill_a001, sync)
 
 u:(^empty) %where_soli
 ^execute(launchAnimation, looking_up_left_hand_b001, sync) Wo sind denn alle hin?
@@ -52,7 +49,7 @@ u:(^empty) %reden_soli
 ^execute(launchAnimation, chill_a001, async) Ihr könnt ruhig einfach mit mir reden.
 
 u:(^empty) %fragen_soli
-Wollt mich wirklich niemand etwas fragen? Vielleicht nach einem Foto oder einem Tanz?
+Will mich wirklich niemand hier etwas fragen? Vielleicht nach einem Foto oder einem Tanz?
 
 u:(^empty) %dreaming_soli
 Falls ich mal wieder vor mich hinträume, ruft einfach mal Pepper oder streichelt meinen Kopf
