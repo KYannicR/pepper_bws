@@ -16,12 +16,16 @@ import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
 import com.aldebaran.qi.sdk.object.conversation.Say;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class CareerActivity extends RobotActivity implements RobotLifecycleCallbacks{
     private QiContext qiContext;
     private boolean cancelled = false;
     private int image;
     Button back, left, right;
+    private Timer timeoutTimer;
 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +33,7 @@ public class CareerActivity extends RobotActivity implements RobotLifecycleCallb
         QiSDK.register(this, this);
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.ALWAYS);
         setContentView(R.layout.activity_career);
+        startTimer();
         initListeners();
         setImage(R.drawable.benefits1);
         image = 1;
@@ -38,6 +43,7 @@ public class CareerActivity extends RobotActivity implements RobotLifecycleCallb
     private void initListeners() {
         back = findViewById(R.id.back2);
         back.setOnClickListener(v -> {
+            cancelTimer();
             cancelled = true;
             Intent activity2Intent = new Intent(CareerActivity.this, MainActivity.class);
             startActivity(activity2Intent);
@@ -46,6 +52,8 @@ public class CareerActivity extends RobotActivity implements RobotLifecycleCallb
 
         left = findViewById(R.id.left);
         left.setOnClickListener(v -> {
+            cancelTimer();
+            startTimer();
             switch(image){
                 case 1:
                     clearImage();
@@ -67,6 +75,8 @@ public class CareerActivity extends RobotActivity implements RobotLifecycleCallb
 
         right = findViewById(R.id.right);
         right.setOnClickListener(v -> {
+            cancelTimer();
+            startTimer();
             switch(image){
                 case 1:
                     clearImage();
@@ -86,10 +96,29 @@ public class CareerActivity extends RobotActivity implements RobotLifecycleCallb
             }
         });
     }
+    private void cancelTimer() {
+        timeoutTimer.cancel();
+        timeoutTimer.purge();
+    }
+
+    private void startTimer() {
+        timeoutTimer = new Timer();
+        timeoutTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                cancelled = true;
+                Intent activity2Intent = new Intent(CareerActivity.this, MainActivity.class);
+                startActivity(activity2Intent);
+                finishAffinity();
+                cancelTimer();
+            }
+        }, 90000, 90000);
+    }
 
     @Override
     protected void onDestroy() {
         // Unregister the RobotLifecycleCallbacks for this Activity.
+        if(timeoutTimer != null) cancelTimer();
         QiSDK.unregister(this, this);
         super.onDestroy();
     }
@@ -109,29 +138,12 @@ public class CareerActivity extends RobotActivity implements RobotLifecycleCallb
     @Override
     public void onRobotFocusLost() {
         this.qiContext = null;
+        if(timeoutTimer != null) cancelTimer();
     }
 
     @Override
     public void onRobotFocusRefused(String reason) {
         this.qiContext = null;
-    }
-
-    private void runPresentation() throws InterruptedException {
-        setImage(R.drawable.benefits1);
-        sayText().run();
-        Thread.sleep(10000);
-        clearImage();
-        setImage(R.drawable.benefits2);
-        Thread.sleep(10000);
-        clearImage();
-        setImage(R.drawable.benefits3);
-        Thread.sleep(10000);
-        clearImage();
-        if(!cancelled) {
-            Intent activity2Intent = new Intent(CareerActivity.this, MainActivity.class);
-            startActivity(activity2Intent);
-            finishAffinity();
-        }
     }
 
     private Say sayText(){
@@ -142,7 +154,7 @@ public class CareerActivity extends RobotActivity implements RobotLifecycleCallb
 
     private void setImage(Integer resource){
         runOnUiThread(() -> {
-            ImageView test = findViewById(R.id.splashImageView);
+            ImageView test = findViewById(R.id.splashImageView2);
             test.setImageResource(resource);
             test.setVisibility(View.VISIBLE);
         });
@@ -150,7 +162,7 @@ public class CareerActivity extends RobotActivity implements RobotLifecycleCallb
 
     private void clearImage(){
         runOnUiThread(() -> {
-            ImageView test = findViewById(R.id.splashImageView);
+            ImageView test = findViewById(R.id.splashImageView2);
             test.setVisibility(View.GONE);
         });
     }

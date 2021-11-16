@@ -55,7 +55,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class MainActivity extends RobotActivity implements RobotLifecycleCallbacks {
-    public Button kar_button, ent_button, jobs_button;
+    public Button kar_button, ent_button, jobs_button, us_button;
     public Chat chat;
     private QiContext qiContext;
     private QiChatbot qiChatbot;
@@ -84,6 +84,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         kar_button = findViewById(R.id.kar_button);
         ent_button = findViewById(R.id.ent_button);
         jobs_button = findViewById(R.id.jobs_button);
+        us_button = findViewById(R.id.us_button);
         //TODO
         ent_button.setVisibility(View.GONE);
     }
@@ -98,6 +99,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         kar_button = findViewById(R.id.kar_button);
         ent_button = findViewById(R.id.ent_button);
         jobs_button = findViewById(R.id.jobs_button);
+        us_button = findViewById(R.id.us_button);
         //TODO
         ent_button.setVisibility(View.GONE);
     }
@@ -357,7 +359,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             public void run() {
                 if(!saidSomething){
                     saidSomething = true;
-                    tryProactive();
+                    tryProactive(); 
                 }
             }
         }, 18000, 20000);
@@ -484,6 +486,12 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             startActivity(activity2Intent);
             finishAffinity();
         });
+        us_button.setOnClickListener(v -> {
+            stopTimers();
+            Intent activity2Intent = new Intent(MainActivity.this, AboutUsActivity.class);
+            startActivity(activity2Intent);
+            finishAffinity();
+        });
 
         humanAwareness.addOnHumansAroundChangedListener(changedHumans -> {
             if(changedHumans.size() != 0 && !saidSomething){
@@ -540,6 +548,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             //TODO ent_button.setVisibility(View.GONE);
             kar_button.setVisibility(View.GONE);
             jobs_button.setVisibility(View.GONE);
+            us_button.setVisibility(View.GONE);
         });
     }
 
@@ -552,6 +561,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             //TODO ent_button.setVisibility(View.VISIBLE);
             kar_button.setVisibility(View.VISIBLE);
             jobs_button.setVisibility(View.VISIBLE);
+            us_button.setVisibility(View.VISIBLE);
         });
     }
 }

@@ -14,7 +14,7 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/splashImageView"
+        android:id="@+id/splashImageView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerInside"

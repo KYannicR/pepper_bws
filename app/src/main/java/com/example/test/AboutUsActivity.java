@@ -18,25 +18,29 @@ import com.aldebaran.qi.sdk.object.conversation.Say;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class JobsActivity extends RobotActivity implements RobotLifecycleCallbacks{
-    private Button back, job1, job2, job3, job4, job5;
+public class AboutUsActivity extends RobotActivity implements RobotLifecycleCallbacks{
+    private Button back, backTeam, backImage, team, locations, bws;
     private QiContext qiContext;
-    private boolean jobs_active;
+    private boolean showingImage;
     private Timer timeoutTimer;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.ALWAYS);
-        setContentView(R.layout.activity_jobs);
-        jobs_active = true;
-        back = findViewById(R.id.back);
-        job1 = findViewById(R.id.job1);
-        job2 = findViewById(R.id.job2);
-        job3 = findViewById(R.id.job3);
-        job4 = findViewById(R.id.job4);
-        job5 = findViewById(R.id.job5);
+        setContentView(R.layout.activity_aboutus);
+        findViewById(R.id.buttonGrid).setVisibility(View.VISIBLE);
+        findViewById(R.id.scrollTeam).setVisibility(View.GONE);
+        findViewById(R.id.imageView).setVisibility(View.GONE);
+        showingImage = false;
+        back = findViewById(R.id.back3);
+        team = findViewById(R.id.team);
+        locations = findViewById(R.id.locations);
+        bws = findViewById(R.id.bws);
+        backTeam = findViewById(R.id.back4);
+        backImage = findViewById(R.id.back5);
         initButtonListeners();
 
     }
@@ -46,14 +50,17 @@ public class JobsActivity extends RobotActivity implements RobotLifecycleCallbac
         super.onResume();
         QiSDK.register(this, this);
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.ALWAYS);
-        setContentView(R.layout.activity_jobs);
-        jobs_active = true;
-        back = findViewById(R.id.back);
-        job1 = findViewById(R.id.job1);
-        job2 = findViewById(R.id.job2);
-        job3 = findViewById(R.id.job3);
-        job4 = findViewById(R.id.job4);
-        job5 = findViewById(R.id.job5);
+        setContentView(R.layout.activity_aboutus);
+        findViewById(R.id.buttonGrid).setVisibility(View.VISIBLE);
+        findViewById(R.id.scrollTeam).setVisibility(View.GONE);
+        findViewById(R.id.imageView).setVisibility(View.GONE);
+        showingImage = false;
+        back = findViewById(R.id.back3);
+        team = findViewById(R.id.team);
+        locations = findViewById(R.id.locations);
+        bws = findViewById(R.id.bws);
+        backTeam = findViewById(R.id.back4);
+        backImage = findViewById(R.id.back5);
         initButtonListeners();
     }
 
@@ -86,56 +93,50 @@ public class JobsActivity extends RobotActivity implements RobotLifecycleCallbac
     private void initButtonListeners() {
         back.setOnClickListener(v -> {
             cancelTimer();
-
-            if(jobs_active) {
-                Intent activity2Intent = new Intent(JobsActivity.this, MainActivity.class);
-                startActivity(activity2Intent);
-                finishAffinity();
-            } else {
-                clearImage();
-                showButtons();
-                jobs_active = true;
-            }
+            Intent activity2Intent = new Intent(AboutUsActivity.this, MainActivity.class);
+            startActivity(activity2Intent);
+            finishAffinity();
         });
 
-        job1.setOnClickListener(v -> {
+        backTeam.setOnClickListener(v -> {
             cancelTimer();
             startTimer();
-            jobs_active = false;
-            hideButtons();
-            setImage(R.drawable.java);
+            clearImage();
+            findViewById(R.id.buttonGrid).setVisibility(View.VISIBLE);
+            findViewById(R.id.scrollTeam).setVisibility(View.GONE);
+            findViewById(R.id.imageView).setVisibility(View.GONE);
         });
 
-        job2.setOnClickListener(v -> {
+        backImage.setOnClickListener(v -> {
             cancelTimer();
             startTimer();
-            jobs_active = false;
-            hideButtons();
-            setImage(R.drawable.juniorj);
+            clearImage();
+            findViewById(R.id.buttonGrid).setVisibility(View.VISIBLE);
+            findViewById(R.id.scrollTeam).setVisibility(View.GONE);
+            findViewById(R.id.imageView).setVisibility(View.GONE);
         });
 
-        job3.setOnClickListener(v -> {
+        team.setOnClickListener(v -> {
             cancelTimer();
             startTimer();
-            jobs_active = false;
-            hideButtons();
-            setImage(R.drawable.seniorj);
+            findViewById(R.id.buttonGrid).setVisibility(View.GONE);
+            findViewById(R.id.scrollTeam).setVisibility(View.VISIBLE);
         });
 
-        job4.setOnClickListener(v -> {
+        bws.setOnClickListener(v -> {
             cancelTimer();
+            showingImage = true;
             startTimer();
-            jobs_active = false;
-            hideButtons();
-            setImage(R.drawable.dotnet);
+            findViewById(R.id.buttonGrid).setVisibility(View.GONE);
+            setImage(R.drawable.bws3);
         });
 
-        job5.setOnClickListener(v -> {
+        locations.setOnClickListener(v -> {
             cancelTimer();
+            showingImage = true;
             startTimer();
-            jobs_active = false;
-            hideButtons();
-            setImage(R.drawable.student);
+            findViewById(R.id.buttonGrid).setVisibility(View.GONE);
+            setImage(R.drawable.standorte);
         });
     }
 
@@ -151,7 +152,7 @@ public class JobsActivity extends RobotActivity implements RobotLifecycleCallbac
         timeoutTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Intent activity2Intent = new Intent(JobsActivity.this, MainActivity.class);
+                Intent activity2Intent = new Intent(AboutUsActivity.this, MainActivity.class);
                 startActivity(activity2Intent);
                 finishAffinity();
                 clearImage();
@@ -161,39 +162,37 @@ public class JobsActivity extends RobotActivity implements RobotLifecycleCallbac
     }
 
     private void hideButtons() {
-        job1.setVisibility(View.GONE);
-        job2.setVisibility(View.GONE);
-        job3.setVisibility(View.GONE);
-        job4.setVisibility(View.GONE);
-        job5.setVisibility(View.GONE);
+        team.setVisibility(View.GONE);
+        bws.setVisibility(View.GONE);
+        locations.setVisibility(View.GONE);
     }
 
     private void showButtons() {
-        job1.setVisibility(View.VISIBLE);
-        job2.setVisibility(View.VISIBLE);
-        job3.setVisibility(View.VISIBLE);
-        job4.setVisibility(View.VISIBLE);
-        job5.setVisibility(View.VISIBLE);
+        team.setVisibility(View.VISIBLE);
+        bws.setVisibility(View.VISIBLE);
+        locations.setVisibility(View.VISIBLE);
     }
 
     private Say sayText(){
         return SayBuilder.with(qiContext)
-                .withText("Hier siehst du unsere aktuellen Stellenangebote, klick einfach eins an, um mehr zu erfahren!")
+                .withText("Was möchtest du über uns wissen?")
                 .build();
     }
 
     private void setImage(Integer resource){
         runOnUiThread(() -> {
-            ImageView test = findViewById(R.id.splashImageView);
+            ImageView test = findViewById(R.id.splashImageViewAbout);
             test.setImageResource(resource);
+            findViewById(R.id.imageView).setVisibility(View.VISIBLE);
             test.setVisibility(View.VISIBLE);
         });
     }
 
     private void clearImage(){
         runOnUiThread(() -> {
-            ImageView test = findViewById(R.id.splashImageView);
+            ImageView test = findViewById(R.id.splashImageViewAbout);
             test.setVisibility(View.GONE);
+            findViewById(R.id.imageView).setVisibility(View.GONE);
         });
     }
 

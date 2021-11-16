@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AboutUsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:id="@+id/imageView"
+        android:visibility="gone">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/back5"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="110dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/buttonshape"
+                android:drawableEnd="@drawable/abc_vector_test"
+                android:paddingStart="0dp"
+                android:paddingEnd="45dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/splashImageViewAbout"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/splashImageViewAbout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <GridLayout
+        android:id="@+id/buttonGrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/entertainment"
+        android:columnCount="7"
+        android:padding="20dp"
+        android:rowCount="7"
+        android:visibility="visible">
+        <Space android:layout_columnWeight="1"
+            android:layout_rowWeight="2"
+            android:layout_row="1"
+            android:layout_column="2"/>
+        <Space android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_row="1"
+            android:layout_column="2"/>
+        <Space android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_row="3"
+            android:layout_column="4"/>
+        <Space android:layout_width="110dp"
+            android:layout_rowWeight="1"
+            android:layout_row="2"
+            android:layout_column="6"/>
+        <Space android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_row="6"
+            android:layout_column="4"/>
+
+        <Button
+            android:id="@+id/locations"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="220dp"
+            android:layout_height="110dp"
+            android:layout_row="5"
+            android:layout_column="3"
+            android:background="@drawable/buttonshape"
+            android:fontFamily="@font/roboto_black"
+            android:text="&lt; UNSERE STANDORTE &gt;"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/bws"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="220dp"
+            android:layout_height="110dp"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:background="@drawable/buttonshape"
+            android:fontFamily="@font/roboto_black"
+            android:text="&lt; Unser unternehmen &gt;"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/back3"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="110dp"
+            android:layout_height="55dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:background="@drawable/buttonshape"
+            android:drawableEnd="@drawable/abc_vector_test"
+            android:fontFamily="@font/roboto_black"
+            android:paddingStart="0dp"
+            android:paddingEnd="45dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/team"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="220dp"
+            android:layout_height="110dp"
+            android:layout_row="2"
+            android:layout_column="5"
+            android:background="@drawable/buttonshape"
+            android:fontFamily="@font/roboto_black"
+            android:text="&lt; UNSER TEAM &gt;"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </GridLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollTeam"
+        android:visibility="gone">
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="7"
+        android:rowCount="5"
+        android:padding="20dp">
+        <Space
+            android:layout_width="110dp"
+            android:layout_height="55dp"
+            android:layout_row="0"
+            android:layout_column="6"/>
+        <Space
+            android:layout_width="20dp"
+            android:layout_row="0"
+            android:layout_column="2"/>
+        <Space
+            android:layout_width="20dp"
+            android:layout_row="0"
+            android:layout_column="4"/>
+        <Space
+            android:layout_height="20dp"
+            android:layout_row="1"
+            android:layout_column="4"/>
+        <Button
+            android:id="@+id/back4"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="110dp"
+            android:layout_height="55dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:background="@drawable/buttonshape"
+            android:drawableEnd="@drawable/abc_vector_test"
+            android:fontFamily="@font/roboto_black"
+            android:paddingStart="0dp"
+            android:paddingEnd="45dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="visible"/>
+
+        <RelativeLayout
+            android:paddingVertical="20dp"
+            android:layout_gravity="center"
+            android:layout_row="2"
+            android:layout_column="1">
+            <ImageView
+                android:layout_width="220dp"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ulrich2"
+                android:id="@+id/ulrich"/>
+            <TextView
+                android:id="@+id/myImageViewText"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignStart="@+id/ulrich"
+                android:layout_alignEnd="@+id/ulrich"
+                android:layout_below="@id/ulrich"
+                android:background="#6AC5CE"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_black"
+                android:text="ULRICH RÜHL\n GESCHÄFTSLEITUNG"
+                android:lineSpacingMultiplier="1.3"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingVertical="20dp"
+            android:layout_gravity="center"
+            android:layout_row="2"
+            android:layout_column="3">
+            <ImageView
+                android:layout_width="220dp"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/peter2"
+                android:id="@+id/peter"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignStart="@+id/peter"
+                android:layout_alignEnd="@+id/peter"
+                android:layout_below="@id/peter"
+                android:background="#6AC5CE"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_black"
+                android:text="PETER DRECHSEL\n GESCHÄFTSLEITUNG"
+                android:lineSpacingMultiplier="1.3"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingVertical="20dp"
+            android:layout_gravity="center"
+            android:layout_row="2"
+            android:layout_column="5">
+            <ImageView
+                android:layout_width="220dp"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/marius2"
+                android:id="@+id/marius"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignStart="@+id/marius"
+                android:layout_alignEnd="@+id/marius"
+                android:layout_below="@id/marius"
+                android:background="#6AC5CE"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_black"
+                android:text="MARIUS BREDERLOW\n GESCHÄFTSLEITUNG"
+                android:lineSpacingMultiplier="1.3"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingVertical="20dp"
+            android:layout_gravity="center"
+            android:layout_row="3"
+            android:layout_column="1">
+            <ImageView
+                android:layout_width="220dp"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/jessica2"
+                android:id="@+id/jessica"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignStart="@+id/jessica"
+                android:layout_alignEnd="@+id/jessica"
+                android:layout_below="@id/jessica"
+                android:background="#6AC5CE"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_black"
+                android:text="JESSICA HEINE\n HUMAN RESOURCES"
+                android:lineSpacingMultiplier="1.3"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingVertical="20dp"
+            android:layout_gravity="center"
+            android:layout_row="3"
+            android:layout_column="3">
+            <ImageView
+                android:layout_width="220dp"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/jan2"
+                android:id="@+id/jan"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignStart="@+id/jan"
+                android:layout_alignEnd="@+id/jan"
+                android:layout_below="@id/jan"
+                android:background="#6AC5CE"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_black"
+                android:text="JAN FALTIN\n VERTRIEBSLEITUNG"
+                android:lineSpacingMultiplier="1.3"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingVertical="20dp"
+            android:layout_gravity="center"
+            android:layout_row="3"
+            android:layout_column="5">
+            <ImageView
+                android:layout_width="220dp"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/marcel2"
+                android:id="@+id/marcel"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignStart="@+id/marcel"
+                android:layout_alignEnd="@+id/marcel"
+                android:layout_below="@id/marcel"
+                android:background="#6AC5CE"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_black"
+                android:text="MARCEL CABALLERO\n KEY ACCOUNT MANAGEMENT"
+                android:lineSpacingMultiplier="1.3"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingVertical="20dp"
+            android:layout_gravity="center"
+            android:layout_row="4"
+            android:layout_column="1">
+            <ImageView
+                android:layout_width="220dp"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/anna2"
+                android:id="@+id/anna"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignStart="@+id/anna"
+                android:layout_alignEnd="@+id/anna"
+                android:layout_below="@id/anna"
+                android:background="#6AC5CE"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_black"
+                android:text="ANNA-MARIA BÖHNKE\n MARKETING"
+                android:lineSpacingMultiplier="1.3"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingVertical="20dp"
+            android:layout_gravity="center"
+            android:layout_row="4"
+            android:layout_column="3">
+            <ImageView
+                android:layout_width="220dp"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/lukas2"
+                android:id="@+id/lukas"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignStart="@+id/lukas"
+                android:layout_alignEnd="@+id/lukas"
+                android:layout_below="@id/lukas"
+                android:background="#6AC5CE"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_black"
+                android:text="LUKAS EICKE\n MARKETING"
+                android:lineSpacingMultiplier="1.3"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingVertical="20dp"
+            android:layout_gravity="center"
+            android:layout_row="4"
+            android:layout_column="5">
+            <ImageView
+                android:layout_width="220dp"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sekreteriat2"
+                android:id="@+id/sekreteriat"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignStart="@+id/sekreteriat"
+                android:layout_alignEnd="@+id/sekreteriat"
+                android:layout_below="@id/sekreteriat"
+                android:background="#6AC5CE"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_black"
+                android:text="KRISTIN W. &amp; PETRA R.\n SEKRETERIAT"
+                android:lineSpacingMultiplier="1.3"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+
+
+    </GridLayout>
+    </ScrollView>
+
+</LinearLayout>
