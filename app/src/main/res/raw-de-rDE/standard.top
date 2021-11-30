@@ -19,7 +19,14 @@ concept:(goodbye) [Bye "bye bye" "bei bei" "bai bai" Tschüss Ciao Tschau "bis d
 #concept:(animation_disapointed)["^run(animations/Stand/Emotions/Negative/Disappointed_1)"]
 #concept:(hallo_anim) [^execute(launchAnimation, hello_a004, async)]
 #u:(elefant) ok mache ^execute(launchAnimation, elephant, async) ich mal
-
+def: sayDate($year, $month, $day) "^first["$day==1 Erste" "$day==2 Zweite" "$day==3 Dritte" "$day==4 Vierte" "$day==5 Fünfte" "$day==6 Sechste" "$day==7 Siebte" "$day==8 Achte"
+                                                           "$day==9 Neunte" "$day==10 Zehnte" "$day==11 Elfte" "$day==12 Zwölfte" "$day==13 Dreizehnte" "$day==14 Vierzehnte" "$day==15 Fünfzehnte"
+                                                           "$day==16 Sechzente" "$day==17 Siebzehnte" "$day==18 Achtzehnte" "$day==19 Neunzehnte" "$day==20 Zwanzigste" "$day==21 einundzwanzigste"
+                                                           "$day==22 zweiundzwanzigste" "$day==23 dreiundzwanzigste" "$day==24 vierundzwanzigste" "$day==25 fünfundzwanzigste" "$day==26 sechsundzwanzigste"
+                                                           "$day==27 siebenundzwanzigste" "$day==28 achtundzwanzigste" "$day==29 neunundzwanzigste" "$day==30 dreißigste" "$day==31 einunddreißigste" "Keine Ahnung."]
+                                                     ^first["$month==1 Januar" "$month==2 Februar" "$month==3 März" "$month==4 April" "$month==5 Mai" "$month==6 Juni" "$month==7 Juli" "$month==8 August"
+                                                           "$month==9 September" "$month==10 Oktober" "$month==11 November" "$month==12 Dezember" "Ich weiß nicht mal welchen Monat wir zurzeit haben"]
+                                                     ^first["$year==2021 2021" "$year==2022 2022" "$year==2023 2023" "$year==2024 2024" "$year==2025 2025" "$year==2026 2026" "$year==2027 2027" "$year==2028 2028"]"
 # Replying to speech
 #########Begrüßungen und Verabschiedungen######################
 u:(~smalltalkf) ~smalltalka
@@ -90,10 +97,12 @@ u:(["[Verstehst Hörst] du {denn} {überhaupt} {was} [mich ich]  {eigentlich} {d
 
 #########Sag mal was##########################
 u:(["{Pepper} [Sag Erzähl Mach Hau] {mal ma} irgendwas {raus}"
-    "{Pepper} Kannst du irgendwas [sagen sprechen reden erzählen]?"])
+    "{Pepper} Kannst du irgendwas [sagen sprechen reden erzählen]?"
+    "{Pepper} du sollst {mal ma} irgendwas {raus} [Sagen Erzählen Hauen Machen]"])
 Irgendwas.... Haha, ich bin so lustig
 u:(["{Pepper} [Sag Erzähl Hau Mach] {mal ma} was {raus}"
-    "{Pepper} Kannst du was [sagen sprechen reden erzählen]?"])
+    "{Pepper} Kannst du was [sagen sprechen reden erzählen]?"
+    "{Pepper} du sollst {mal ma} was {raus} [Sagen Erzählen Hauen Machen]"])
 Was.... Haha, ich bin so lustig
 
 u:("{~hi} {Ok Okay Oke Okey} Google") Sehe ich etwa aus wie Google?
@@ -255,10 +264,23 @@ Klar ^execute(playSound, musicshort) ^execute(launchAnimation, dance_b001, sync)
 u:(["[Wollen Wolln Willst Willste Möchtest Kannst "Bist du in der Lage zu" Kannste] {du wir} {denn} {überhaupt} {eigentlich} {mal} {mit} {mir uns} {hier} tanzen?"])
 Klar ^execute(playSound, musiclong) ^execute(launchAnimation, disco_a001, sync) Leider kenne ich noch nicht so viele coole Muhfs
 
-u:(Testasync)
-Ok ^execute(launchAnimation, gorilla_a001, async) das hier sollte jetzt asynchron laufen
-
 u:(["Was [werden wird] {denn} {zurzeit} {für} {Berufe Jobs Personen Studenten Stellen} {bei beim "bei der" für in} {der die das} [BWS "eurem Unternehmen" "eurer Firma" "BWS {Konsalting} Group" "BWS {Konsalting} Grub"] [gesucht gebraucht benötigt]"
     "Was {für} {Berufe Jobs Personen Studenten Stellen} [braucht benötigt sucht] {der die das} [BWS "euer Unternehmen" "eure Firma" "BWS {Konsalting} Group" "BWS {Konsalting} Grub"] {denn} {zurzeit jetzt gerade grade} {für} {Berufe Jobs Personen Studenten Stellen}?"
     "[Welche Welcher] {Job Beruf Stelle Berufe Jobs Personen Studenten Stellen} {werden wird} {denn} {zurzeit jetzt gerade grad grade} {bei für in} {der die das} [BWS "eurem Unternehmen" "eurer Firma" "BWS {Konsalting} Group" "BWS {Konsalting} Grub"] [gesucht gebraucht benötigt]"])
 Schau einfach mal hinter dem Button... Wir suchen... welche Stellenangebote derzeit offen sind.
+
+u:(["Was [studierst studierste lernst lernste] du {denn} {so}"])
+^rand["Ich weiß sowieso alles. Ich brauche nichts mehr lernen. Und falls doch, bekomme ich einfach ein Update."
+      "Ich muss nicht studieren, ich bekomme einfach ein Update wenn ich etwas nicht weiß. Hättest du wohl auch gerne."]
+
+u:(["[Kannst Kannste "Bist du in der Lage zu" Willst Darfst Musst Magst] {du} [furzen pupen pupsen]?"])
+Ach quatsch. So was kann ich nicht... ^execute(playSound, fart1)  ^execute(launchAnimation, affirmation_a001, sync) Ups
+
+u:(["[Puhps Pups Poops Furz] {mal}"])
+So was kann man doch nicht auf Knopfdruck... ^execute(playSound, fart2) ^execute(launchAnimation, affirmation_a001, sync) Ups
+
+u:(["Wie spät ist es {jetzt} {gerade grade grad}?" "Wie viel Uhr {"ist es"} {haben} {wir} {jetzt} {gerade grade grad}?" "Wie spät?" "Uhrzeit?"])
+^execute(launchAnimation, check_time_left_b001, async) Also nach meiner Uhr ist es genau ^currentTime
+
+u:(["Datum?" "Welcher Tag ist heute?" "Der wie vielte ist heute?" "Welches Datum haben wir?" "Kannst du mir {vielleicht} sagen welcher Tag heute ist?" "Verrätst du mir welcher Tag heute ist?" "Weißt du welcher Tag heute ist?" "Weißt du das heutige Datum?" "Weißt du das Datum von heute?" "Weißt du welcher heute ist?" "Welcher ist heute?"])
+Nach meinem Kalender ist heute der ^currentDate

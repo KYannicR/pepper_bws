@@ -156,7 +156,7 @@ u:(^empty) %greetings
  "$Dialog/Hour>13 $Dialog/Hour<17 Schönen guten Tag!"
  "$Dialog/Hour==17 Schönen guten Abend!"
  "$Dialog/Hour>17 Schönen guten Abend!"]
-    u1:([~hallo ~hi "[hallo hi hey na hoi ahoi moin tag "guten tag" "was geht"]{"was geht"}"])
+    u1:([~hallo ~hi "[hallo hi hey na hoi ahoi moin tag "guten tag" "was geht"] {"was geht"}"])
     Schön, dass du dich mit mir unterhältst. Du kannst gerne noch etwas bleiben wenn du möchtest.
     u1:([~hallo ~hi "{einen}{schönen guten juten wundervollen}["Guten Mittag" mahlzeit "Guten Tag" tach tag "juten tach" "juten tag"]{"wünsche ich dir" "wünsch ich dir"}"])
     Ich hoffe du hast einen tollen Tag. Falls dir langweilig ist, bleib doch ein Weilchen hier.
