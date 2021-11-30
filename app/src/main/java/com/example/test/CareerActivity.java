@@ -1,6 +1,5 @@
 package com.example.test;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +17,6 @@ import com.aldebaran.qi.sdk.object.conversation.Say;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
 
 public class CareerActivity extends RobotActivity implements RobotLifecycleCallbacks{
     private QiContext qiContext;
