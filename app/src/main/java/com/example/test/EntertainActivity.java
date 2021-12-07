@@ -165,28 +165,10 @@ public class EntertainActivity extends RobotActivity implements RobotLifecycleCa
         Animate animate = AnimateBuilder.with(qiContext) // Create the builder with the context.
                 .withAnimation(animation) // Set the animation.
                 .build();
-        holdAbilities(qiContext);
         highFiveFuture.requestCancellation();
         highFiveFuture.cancel(true);
         animate.run();
-        releaseAbilities();
+
     }
 
-    private void holdAbilities(QiContext qiContext) {
-        // Build the holder for the abilities.
-        holder = HolderBuilder.with(qiContext)
-                .withAutonomousAbilities(
-                        AutonomousAbilitiesType.BACKGROUND_MOVEMENT,
-                        AutonomousAbilitiesType.BASIC_AWARENESS,
-                        AutonomousAbilitiesType.AUTONOMOUS_BLINKING
-                )
-                .build();
-
-        // Hold the abilities asynchronously.
-        Future<Void> holdFuture = holder.async().hold();
-    }
-    private void releaseAbilities() {
-        // Release the holder asynchronously.
-        Future<Void> releaseFuture = holder.async().release();
-    }
 }
