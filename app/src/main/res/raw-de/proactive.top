@@ -10,8 +10,8 @@ concept:(hi) [Hai Hei Hi Hey Hej Hey Hi Hey Hei Hay Hai]
 concept:(hallo) [Hai Hei Hallo Hallu Hi Hey Hej "Guten Morgen" Morgen "Guten Tag" Servus "Nah du" Nah Grüße "Grüß dich" "Grüs dich"] {Pepper}!
 
 u:(^empty) %wo_am_liebsten_pro
-^execute(launchAnimation, hello_a009, async) Hi, Möchtest du lieber an unserem Standort in Wolfsburg, Braunschweig oder Hannover arbeiten?
-  u1:("{"ich denke" denke "denke mal"} {lieber eher "am liebsten" "am ehesten" wahrscheinlich eher} {in bei nahe} {"der nähe"} Hannover")
+^execute(launchAnimation, hello_a009, async) Hi, Möchtest du lieber an unserem Standort in Wolfsburg, Braunschweig oder Dortmund arbeiten?
+  u1:("{"ich denke" denke "denke mal"} {lieber eher "am liebsten" "am ehesten" wahrscheinlich eher} {in bei nahe} {"der nähe"} Dortmund")
         Dann bewirb dich doch gleich dort
   u1:("{"ich denke" denke "denke mal"} {lieber eher "am liebsten" "am ehesten" wahrscheinlich eher} {in bei nahe} {"der nähe"} Braunschweig")
         Cool, gerne kannst du dich dort bewerben

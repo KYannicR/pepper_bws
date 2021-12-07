@@ -85,7 +85,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         ent_button = findViewById(R.id.ent_button);
         jobs_button = findViewById(R.id.jobs_button);
         us_button = findViewById(R.id.us_button);
-        //TODO
         ent_button.setVisibility(View.GONE);
     }
 
@@ -100,8 +99,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         ent_button = findViewById(R.id.ent_button);
         jobs_button = findViewById(R.id.jobs_button);
         us_button = findViewById(R.id.us_button);
-        //TODO
-        ent_button.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -545,7 +543,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             test.setImageResource(R.drawable.speaking);
             test.setVisibility(View.VISIBLE);
 
-            //TODO ent_button.setVisibility(View.GONE);
+            ent_button.setVisibility(View.GONE);
             kar_button.setVisibility(View.GONE);
             jobs_button.setVisibility(View.GONE);
             us_button.setVisibility(View.GONE);
@@ -558,7 +556,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             ImageView test = findViewById(R.id.splashImageView);
             test.setVisibility(View.GONE);
 
-            //TODO ent_button.setVisibility(View.VISIBLE);
+            ent_button.setVisibility(View.VISIBLE);
             kar_button.setVisibility(View.VISIBLE);
             jobs_button.setVisibility(View.VISIBLE);
             us_button.setVisibility(View.VISIBLE);

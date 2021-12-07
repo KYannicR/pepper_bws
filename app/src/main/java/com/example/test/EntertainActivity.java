@@ -12,12 +12,17 @@ import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.builder.AnimateBuilder;
 import com.aldebaran.qi.sdk.builder.AnimationBuilder;
+import com.aldebaran.qi.sdk.builder.HolderBuilder;
 import com.aldebaran.qi.sdk.builder.SayBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
+import com.aldebaran.qi.sdk.object.actuation.Actuation;
 import com.aldebaran.qi.sdk.object.actuation.Animate;
 import com.aldebaran.qi.sdk.object.actuation.Animation;
+import com.aldebaran.qi.sdk.object.camera.Camera;
 import com.aldebaran.qi.sdk.object.conversation.Say;
+import com.aldebaran.qi.sdk.object.holder.AutonomousAbilitiesType;
+import com.aldebaran.qi.sdk.object.holder.Holder;
 import com.aldebaran.qi.sdk.object.touch.Touch;
 import com.aldebaran.qi.sdk.object.touch.TouchSensor;
 
@@ -27,6 +32,8 @@ public class EntertainActivity extends RobotActivity implements RobotLifecycleCa
     private QiContext qiContext;
     boolean touched = false;
     Future<Void> highFiveFuture;
+    private Animate highfiveAnim;
+    private Holder holder;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +41,10 @@ public class EntertainActivity extends RobotActivity implements RobotLifecycleCa
         QiSDK.register(this, this);
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.ALWAYS);
         setContentView(R.layout.activity_entertain);
-        back = findViewById(R.id.back);
-        dance = findViewById(R.id.job1);
-        five = findViewById(R.id.job5);
-        hug = findViewById(R.id.job3);
+        back = findViewById(R.id.back6);
+        dance = findViewById(R.id.dance);
+        five = findViewById(R.id.five);
+        hug = findViewById(R.id.hug);
         initButtonListeners();
     }
 
@@ -47,10 +54,10 @@ public class EntertainActivity extends RobotActivity implements RobotLifecycleCa
         QiSDK.register(this, this);
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.ALWAYS);
         setContentView(R.layout.activity_entertain);
-        back = findViewById(R.id.back);
-        dance = findViewById(R.id.job1);
-        five = findViewById(R.id.job5);
-        hug = findViewById(R.id.job3);
+        back = findViewById(R.id.back6);
+        dance = findViewById(R.id.dance);
+        five = findViewById(R.id.five);
+        hug = findViewById(R.id.hug);
         initButtonListeners();
     }
 
@@ -64,13 +71,20 @@ public class EntertainActivity extends RobotActivity implements RobotLifecycleCa
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
         this.qiContext = qiContext;
-        Touch touch = qiContext.getTouch();
-        handTouchSensor = touch.getSensor("RHand/Touch");
-        
+        Animation animation = AnimationBuilder.with(qiContext) // Create the builder with the context.
+                .withResources(R.raw.handshakehold) // Set the animation resource.
+                .build(); // Build the animation.
+        highfiveAnim = AnimateBuilder.with(qiContext) // Create the builder with the context.
+                .withAnimation(animation) // Set the animation.
+                .build();
+        initHandTouchedListener();
     }
 
     @Override
     public void onRobotFocusLost() {
+        if (handTouchSensor != null) {
+            handTouchSensor.removeAllOnStateChangedListeners();
+        }
         this.qiContext = null;
     }
 
@@ -98,33 +112,23 @@ public class EntertainActivity extends RobotActivity implements RobotLifecycleCa
         five.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.activity_speaking);
-                //sayText("High Five").run();
-                Animation animation = AnimationBuilder.with(qiContext) // Create the builder with the context.
-                        .withResources(R.raw.highfive) // Set the animation resource.
-                        .build(); // Build the animation.
-                Animate animate = AnimateBuilder.with(qiContext) // Create the builder with the context.
-                        .withAnimation(animation) // Set the animation.
-                        .build();
-
-                handTouchSensor.addOnStateChangedListener(touchState -> {
-                    if (touchState.getTouched()) {
-                        highFive();
-                        touched = true;
-                    }
-                });
-                highFiveFuture = animate.async().run();
+                //sayText("High Five").async().run();
+                Log.i("Five", "High Five initiated");
+                highFiveFuture = highfiveAnim.async().run();
 
                 highFiveFuture.thenConsume(future -> {
                     if (future.isSuccess()) {
-                        sayText("Nagut dann nicht.").run();
+                        sayText("Nagut, dann nicht.").async().run();
+
                     } else if (future.isCancelled()) {
                         sayText("Nice").async().run();
+
                     } else if (future.hasError()) {
                         Log.e("TAG", "Error", future.getError());
+
                     }
                 });
-                handTouchSensor.removeAllOnStateChangedListeners();
+
             }
         });
         hug.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +140,18 @@ public class EntertainActivity extends RobotActivity implements RobotLifecycleCa
 
     }
 
+    private void initHandTouchedListener() {
+        Touch touch = qiContext.getTouch();
+
+        handTouchSensor = touch.getSensor("RHand/Touch");
+
+        handTouchSensor.addOnStateChangedListener(touchState -> {
+            Log.i("TOUCH", "Touch Noticed");
+            highFive();
+
+        });
+    }
+
     private Say sayText(String text){
         return SayBuilder.with(qiContext)
                 .withText(text)
@@ -144,12 +160,33 @@ public class EntertainActivity extends RobotActivity implements RobotLifecycleCa
 
     private void highFive() {
         Animation animation = AnimationBuilder.with(qiContext) // Create the builder with the context.
-                .withResources(R.raw.nicereaction_a002) // Set the animation resource.
+                .withResources(R.raw.handshakeactive) // Set the animation resource.
                 .build(); // Build the animation.
         Animate animate = AnimateBuilder.with(qiContext) // Create the builder with the context.
                 .withAnimation(animation) // Set the animation.
                 .build();
+        holdAbilities(qiContext);
         highFiveFuture.requestCancellation();
-        animate.async().run();
+        highFiveFuture.cancel(true);
+        animate.run();
+        releaseAbilities();
+    }
+
+    private void holdAbilities(QiContext qiContext) {
+        // Build the holder for the abilities.
+        holder = HolderBuilder.with(qiContext)
+                .withAutonomousAbilities(
+                        AutonomousAbilitiesType.BACKGROUND_MOVEMENT,
+                        AutonomousAbilitiesType.BASIC_AWARENESS,
+                        AutonomousAbilitiesType.AUTONOMOUS_BLINKING
+                )
+                .build();
+
+        // Hold the abilities asynchronously.
+        Future<Void> holdFuture = holder.async().hold();
+    }
+    private void releaseAbilities() {
+        // Release the holder asynchronously.
+        Future<Void> releaseFuture = holder.async().release();
     }
 }

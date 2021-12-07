@@ -16,7 +16,7 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <Button
-        android:id="@+id/job1"
+        android:id="@+id/dance"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="228dp"
         android:layout_height="141dp"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/job5"
+        android:id="@+id/five"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="228dp"
         android:layout_height="141dp"
@@ -45,13 +45,13 @@
 
 
     <Button
-        android:id="@+id/job3"
+        android:id="@+id/hug"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="228dp"
         android:layout_height="141dp"
         android:background="#6AC5CE"
         android:text="@string/hug"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/view_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.911"
@@ -60,17 +60,23 @@
         app:layout_constraintVertical_bias="0.634" />
 
     <Button
-        android:id="@+id/back"
+        android:id="@+id/back6"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="131dp"
-        android:layout_height="44dp"
-        android:background="#6AC5CE"
-        android:text="@string/back"
+        android:layout_width="110dp"
+        android:layout_height="55dp"
+        android:background="@drawable/buttonshape"
+        android:drawableEnd="@drawable/abc_vector_test"
+        android:fontFamily="@font/roboto_black"
+        android:paddingStart="0dp"
+        android:paddingEnd="45dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/view_id"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.015"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.028" />
+        app:layout_constraintVertical_bias="0.02" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
