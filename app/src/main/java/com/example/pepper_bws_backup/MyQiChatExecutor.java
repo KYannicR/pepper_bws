@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.pepper_bws_backup;
 
 import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.QiContext;

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Pepper_BWS</string>
+    <string name="app_name" translatable="false">Pepper_BWS_Backup</string>
     <string name="kar_button" translatable="false">Benefits</string>
     <string name="ent_button" translatable="false">Unterhaltung</string>
     <string name="back" translatable="false">Zurück</string>

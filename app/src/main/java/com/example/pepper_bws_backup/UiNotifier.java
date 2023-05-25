@@ -1,7 +1,4 @@
-package com.example.test;
-
-import com.aldebaran.qi.sdk.object.conversation.Phrase;
-import java.util.List;
+package com.example.pepper_bws_backup;
 
 public interface UiNotifier {
     //void setText(String text);

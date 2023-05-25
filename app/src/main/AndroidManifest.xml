@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.test">
+    package="com.example.pepper_bws_backup">
 
     <uses-feature android:name="com.softbank.hardware.pepper" />
 
@@ -12,11 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AboutUsActivity"/>
-        <activity android:name=".JobsActivity" />
-        <activity android:name=".EntertainActivity" />
-        <activity android:name=".CareerActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.pepper_bws_backup.AboutUsActivity"/>
+        <activity android:name="com.example.pepper_bws_backup.JobsActivity" />
+        <activity android:name="com.example.pepper_bws_backup.EntertainActivity" />
+        <activity android:name="com.example.pepper_bws_backup.CareerActivity" />
+        <activity android:name="com.example.pepper_bws_backup.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

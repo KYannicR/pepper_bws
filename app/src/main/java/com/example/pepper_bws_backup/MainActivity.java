@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.pepper_bws_backup;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -125,7 +125,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         initButtonListeners();
         initListeningListener();
         startTimers();
-        startSolitary();
     }
 
     @Override
@@ -342,11 +341,11 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         proactiveTimer.purge();
     }
     public void stopTimers() {
-        //solitaryTimer.cancel();
         Log.i("END", "TIMER END");
         proactiveTimer.cancel();
+        attractionTimer.cancel();
+        solitaryTimer.cancel();
         purgeTimers();
-        //attractionTimer.cancel();
         //timersActive = false;
     }
 
@@ -362,7 +361,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             }
         }, 18000, 20000);
 
-
+        startSolitary();
         //timersActive = true;
     }
 

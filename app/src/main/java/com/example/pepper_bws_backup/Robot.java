@@ -1,13 +1,11 @@
-package com.example.test;
+package com.example.pepper_bws_backup;
 
 import android.media.MediaPlayer;
 import android.util.Log;
 import android.util.TypedValue;
 
 import com.aldebaran.qi.Future;
-import com.aldebaran.qi.sdk.Qi;
 import com.aldebaran.qi.sdk.QiContext;
-import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.builder.AnimateBuilder;
 import com.aldebaran.qi.sdk.builder.AnimationBuilder;
