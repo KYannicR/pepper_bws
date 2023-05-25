@@ -71,7 +71,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     //private boolean timersActive = false;
     private Map<String, Bookmark> proactiveBookmarks, attractionBookmarks, solitaryBookmarks;
     private Topic proTop, attTop, solTop;
-    private boolean saidSomething;
+    private boolean saidSomething = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,10 +130,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     @Override
     public void onRobotFocusLost() {
         stopTimers();
-        solitaryTimer.cancel();
-        attractionTimer.cancel();
-        purgeTimers();
-
         if (chat != null) {
             chat.removeAllOnStartedListeners();
         }
@@ -156,7 +152,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
 
     @Override
     public void onRobotFocusRefused(String reason) {
-        //stopTimers();
+        stopTimers();
         // The robot focus is refused.
     }
 
@@ -307,7 +303,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
 
     private boolean testAttraction(List<Double> ranges){
         for (Double curr : ranges) {
-            if (curr > 1.5) return true; //curr < 2.5 &&
+            if (curr > 1.5 && curr < 2.5) return true; //curr < 2.5 &&
         }
         return false;
     }
@@ -341,12 +337,10 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         proactiveTimer.purge();
     }
     public void stopTimers() {
-        Log.i("END", "TIMER END");
         proactiveTimer.cancel();
         attractionTimer.cancel();
         solitaryTimer.cancel();
         purgeTimers();
-        //timersActive = false;
     }
 
     public void startTimers() {
@@ -354,15 +348,11 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         proactiveTimer = new Timer();
         proactiveTimer.schedule(new TimerTask() {
             public void run() {
-                if(!saidSomething){
-                    saidSomething = true;
-                    tryProactive(); 
-                }
+                tryProactive();
             }
-        }, 18000, 20000);
+        }, 5000, 20000);
 
         startSolitary();
-        //timersActive = true;
     }
 
     private void startSolitary() {
@@ -372,16 +362,15 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             public void run() {
                 trySolitary();
             }
-        }, 30000, 70000);
+        }, 10000, 70000);
 
         attractionTimer = new Timer();
         attractionTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 tryAttraction();
-                saidSomething = false;
             }
-        }, 25000, 20000);
+        }, 10000, 30000);
     }
 
     private void tryProactive(){
@@ -396,7 +385,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         if (humans != 0 && proactiveZone) {
             animLock.lock();
             try {
-                saidSomething = true;
                 Log.i("PRO", "Speaking Proactive  " + Calendar.getInstance().getTime());
                 speak("proactive");
             } finally {
@@ -439,10 +427,8 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         if ((solitaryZone || humans == 0) && !attractionZone && !proactiveZone) {
             animLock.lock();
             try {
-                hideUI();
                 Log.i("SOL", "Speaking Solitary");
                 speak("solitary");
-                showUI();
             } finally {
                 animLock.unlock();
             }
@@ -454,7 +440,9 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         headTouchSensor = touch.getSensor("Head/Touch");
         headTouchSensor.addOnStateChangedListener(touchState -> {
             if (touchState.getTouched()) {
+                stopTimers();
                 tickle();
+                startTimers();
             }
         });
         Animation tickle1 = AnimationBuilder.with(qiContext).withResources(R.raw.tickling_a001).build();
@@ -491,19 +479,14 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         });
 
         humanAwareness.addOnHumansAroundChangedListener(changedHumans -> {
-            if(changedHumans.size() != 0 && !saidSomething){
-                stopTimers();
-                purgeTimers();
-                saidSomething = true;
+            if(changedHumans.size() != 0){
                 animLock.lock();
                 try {
                     Log.i("SOL", "Speaking Proactive after detect");
                     speak("proactive");
-
                 } finally {
                     animLock.unlock();
                 }
-                startTimers();
             } else {
                 Log.i("Humans", "Found no humans after change or said something.");
             }
@@ -513,7 +496,8 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         humanAwareness.addOnEngagedHumanChangedListener(engagedHuman -> {
             Log.i("Humans", "Engaged Human changed");
             stopTimers();
-            purgeTimers();
+            tryProactive();
+            tryAttraction();
             startTimers();
         });
     }
@@ -522,15 +506,12 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         chat.addOnListeningChangedListener(listening -> {
             //show Buttons while listening
             if(listening.equals(true)) {
-                saidSomething = true;
-                purgeTimers();
-                startTimers();
                 showUI();
+                stopTimers();
+                startTimers();
             } else {
                 hideUI();
                 stopTimers();
-                purgeTimers();
-                saidSomething = true;
             }
         });
     }
